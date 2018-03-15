@@ -2,8 +2,6 @@ module.exports = {
   siteMetadata: {
     title: 'Alexsander Akers',
     author: 'Alexsander Akers',
-    description: 'A starter blog demonstrating what Gatsby can do.',
-    siteUrl: 'https://a2.io/',
   },
   pathPrefix: '/gatsby-starter-blog',
   plugins: [
