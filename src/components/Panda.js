@@ -56,7 +56,10 @@ class Panda extends React.Component {
       scene.add(puppet)
     })
 
-    const renderer = new THREE.WebGLRenderer({ canvas: this.canvas })
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      canvas: this.canvas,
+    })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(this.props.size, this.props.size)
 
