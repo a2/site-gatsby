@@ -58,7 +58,7 @@ class Panda extends React.Component {
 
     const renderer = new THREE.WebGLRenderer({ canvas: this.canvas })
     renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.setSize(250, 250)
+    renderer.setSize(this.props.size, this.props.size)
 
     this.camera = camera
     this.renderer = renderer
@@ -109,11 +109,9 @@ class Panda extends React.Component {
 
   render() {
     return (
-      <div>
-        <canvas ref={e => this.canvas = e}>
-          <img src={pandaFallback} alt="Panda" width="250" height="250" />
-        </canvas>
-      </div>
+      <canvas ref={e => this.canvas = e}>
+        <img src={pandaFallback} alt="Panda" width={this.props.size} height={this.props.size} />
+      </canvas>
     )
   }
 }

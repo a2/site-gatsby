@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { Container } from 'react-responsive-grid'
 
+import Panda from '../components/Panda'
 import { rhythm, scale } from '../utils/typography'
 
 class Template extends React.Component {
@@ -57,6 +58,8 @@ class Template extends React.Component {
         </h3>
       )
     }
+
+    const pandaSize = 150
     return (
       <Container
         style={{
@@ -64,6 +67,9 @@ class Template extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
+        <div style={{ margin: '0 auto', width: pandaSize, height: pandaSize }}>
+          <Panda size={pandaSize} />
+        </div>
         {header}
         {children()}
       </Container>
