@@ -27,10 +27,9 @@ class Bio extends React.Component {
           }}
         />
         <p>
-          Written by <strong>Alexsander Akers</strong> who lives and works in
-          Berlin, Germany where he works on{' '}
-          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both iOS
-          and macOS.
+          An American expat in Berlin, <strong>Alex</strong> works
+          on <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both
+          iOS and macOS. He is very enthusiastic about pandas.
         </p>
       </div>
     )

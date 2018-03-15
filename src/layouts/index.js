@@ -8,36 +8,26 @@ import { rhythm, scale } from '../utils/typography'
 class Template extends React.Component {
   render() {
     const { location, children } = this.props
-    let header
 
     let rootPath = `/`
     if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
       rootPath = __PATH_PREFIX__ + `/`
     }
 
+    let Header
     if (location.pathname === rootPath) {
-      header = (
+      Header = ({ children }) => (
         <h1
           style={{
-            ...scale(1.5),
             marginBottom: rhythm(1.5),
             marginTop: 0,
           }}
         >
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to={'/'}
-          >
-            A&sup2;
-          </Link>
+          {children}
         </h1>
       )
     } else {
-      header = (
+      Header = ({ children }) => (
         <h3
           style={{
             fontFamily: 'Montserrat, sans-serif',
@@ -45,6 +35,19 @@ class Template extends React.Component {
             marginBottom: rhythm(-1),
           }}
         >
+          {children}
+        </h3>
+      )
+    }
+
+    return (
+      <Container
+        style={{
+          maxWidth: rhythm(24),
+          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+        }}
+      >
+        <Header>
           <Link
             style={{
               boxShadow: 'none',
@@ -53,24 +56,14 @@ class Template extends React.Component {
             }}
             to={'/'}
           >
-            Alexsander Akers
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ margin: '0 auto', width: 150, height: 150 }}>
+                <Panda size={150} />
+              </div>
+              <div>Alexsander Akers</div>
+            </div>
           </Link>
-        </h3>
-      )
-    }
-
-    const pandaSize = 150
-    return (
-      <Container
-        style={{
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
-        <div style={{ margin: '0 auto', width: pandaSize, height: pandaSize }}>
-          <Panda size={pandaSize} />
-        </div>
-        {header}
+        </Header>
         {children()}
       </Container>
     )

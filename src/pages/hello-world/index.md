@@ -1,21 +1,10 @@
 ---
-title: Hello World
-date: "2015-05-01T22:12:03.284Z"
+title: Hello, world!
+date: "2016-08-28"
 ---
 
-This is my first post on my new fake blog! How exciting!
+In the programmer fashion of ["Hello, world!" programs](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program), I have thus titled my first post on this blog. (Although technically, this post is more of a "hello _again_." This is not my first post ever, but rather my first in a long, long time.)
 
-I'm sure I'll write a lot more interesting things in the future.
+I hope to post longer-form content here, either about iOS development or technology as a whole. As anyone who knows me will attest, I have no shortage of things to say. In fact, sometimes I even have too much to say. Hopefully this blog will be a nice outlet (or, _@IBOutlet_ 😉) for such thoughts.
 
-Oh, and here's a great quote from this Wikipedia on
-[salted duck eggs](http://en.wikipedia.org/wiki/Salted_duck_egg).
-
-> A salted duck egg is a Chinese preserved food product made by soaking duck
-> eggs in brine, or packing each egg in damp, salted charcoal. In Asian
-> supermarkets, these eggs are sometimes sold covered in a thick layer of salted
-> charcoal paste. The eggs may also be sold with the salted paste removed,
-> wrapped in plastic, and vacuum packed. From the salt curing process, the
-> salted duck eggs have a briny aroma, a gelatin-like egg white and a
-> firm-textured, round yolk that is bright orange-red in color.
-
-![Chinese Salty Egg](./salty_egg.jpg)
+I'd like to post something interesting every once in a while. In case this remains my only post here, my normal rantings can be found on my [Twitter profile](https://twitter.com/a2). I hope to see you again soon, perhaps when I have something more to say.
