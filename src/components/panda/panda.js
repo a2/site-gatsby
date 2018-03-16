@@ -8,6 +8,8 @@ export class Panda extends React.Component {
   constructor() {
     super()
 
+    this.state = {}
+
     this.clock = new THREE.Clock()
     this.mousePosition = new THREE.Vector2()
     this.canvasCenter = new THREE.Vector2()
@@ -15,15 +17,25 @@ export class Panda extends React.Component {
   }
 
   componentDidMount() {
+    new THREE.ObjectLoader().parse(model, puppet => {
+      this.setState({ puppet })
+    })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.animationFrame != null) {
+      return
+    }
+
+    this.handleResize()
+    this.initCanvas()
+    this.animate()
+
     document.addEventListener('mouseout', this.handleMouseOut)
     document.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('deviceorientation', this.handleDeviceOrientation)
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('scroll', this.handleScroll)
-
-    this.handleResize()
-    this.initCanvas()
-    this.animate()
   }
 
   componentWillUnmount() {
@@ -36,14 +48,23 @@ export class Panda extends React.Component {
     window.removeEventListener('resize', this.handleResize)
     window.removeEventListener('scroll', this.handleScroll)
 
-    window.cancelAnimationFrame(this.animationFrame)
+    cancelAnimationFrame(this.animationFrame)
+    this.animationFrame = null
   }
 
-  initCanvas = () => {
+  initCanvas() {
+    const { puppet } = this.state
+
+    const center = new THREE.Vector3()
+    new THREE.Box3().setFromObject(puppet).getCenter(center)
+
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xffffff)
+    scene.position.y = center.y
+    scene.add(puppet)
 
     const camera = new THREE.PerspectiveCamera()
+    camera.position.setY(center.y).setZ(50)
     camera.updateProjectionMatrix()
     scene.add(camera)
 
@@ -53,14 +74,6 @@ export class Panda extends React.Component {
     const pointLight = new THREE.PointLight(0xffffff, 0.75)
     pointLight.position.set(0, 26.95, 57.68)
     camera.add(pointLight)
-
-    const loader = new THREE.ObjectLoader()
-    loader.parse(model, puppet => {
-      const center = new THREE.Vector3()
-      new THREE.Box3().setFromObject(puppet).getCenter(center)
-      scene.position.y = center.y
-      scene.add(puppet)
-    })
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -82,42 +95,39 @@ export class Panda extends React.Component {
   renderScene = () => {
     const delta = this.clock.getDelta()
     const sceneY = this.scene.position.y
-    const { x: newX, y: newY } = this.cameraPosition
+    const { x: newX, y: newY } = this.newCameraPosition()
     const { x: oldX, y: oldY } = this.camera.position
 
     this.camera.position.x += (-newX - oldX) * 15 * delta
     this.camera.position.y += (newY + sceneY - oldY) * 15 * delta
-    this.camera.position.z = 50
 
     this.camera.lookAt(this.scene.position)
     this.renderer.render(this.scene, this.camera)
   }
 
   handleScroll = event => {
-    this.scrollPosition.setY(3 * window.scrollY)
-    this.updateCoordinate()
+    this.scrollPosition.y = 3 * window.scrollY
   }
 
   handleMouseOut = event => {
     this.inside = false
     this.mousePosition = new THREE.Vector2()
-    this.updateCoordinate()
   }
 
   handleMouseMove = event => {
     this.inside = true
     this.mousePosition = new THREE.Vector2(event.clientX, event.clientY)
-    this.updateCoordinate()
   }
 
-  updateCoordinate = () => {
-    this.cameraPosition = new THREE.Vector2()
+  newCameraPosition = () => {
     if (this.inside) {
-      this.cameraPosition
+      return new THREE.Vector2()
         .add(this.mousePosition)
         .add(this.scrollPosition)
         .sub(this.canvasCenter)
         .divideScalar(30)
+    } else {
+      return new THREE.Vector2()
     }
   }
 
@@ -127,28 +137,29 @@ export class Panda extends React.Component {
       rect.x + rect.width / 2,
       rect.y + rect.height / 2
     )
-    this.updateCoordinate()
   }
 
   handleDeviceOrientation = event => {
-    this.mousePosition = new THREE.Vector2(event.gamma, event.beta).clampLength(
-      0,
-      50
-    )
-    this.updateCoordinate()
+    this.mousePosition = (new THREE.Vector2(event.gamma, event.beta))
+      .clampLength(0, 50)
   }
 
   render() {
-    return (
-      <canvas ref={e => (this.canvas = e)}>
-        <img
-          src={fallback}
-          alt="Panda"
-          width={this.props.size}
-          height={this.props.size}
-        />
-      </canvas>
+    const image = (
+      <img
+        src={fallback}
+        alt="Panda"
+        width={this.props.size}
+        height={this.props.size}
+        style={{ marginBottom: 0 }}
+      />
     )
+
+    if (this.state.puppet) {
+      return <canvas ref={ref => (this.canvas = ref)}>{image}</canvas>
+    } else {
+      return <div>{image}</div>
+    }
   }
 }
 
