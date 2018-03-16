@@ -33,7 +33,7 @@ export class Panda extends React.Component {
 
     document.addEventListener('mouseout', this.handleMouseOut)
     document.addEventListener('mousemove', this.handleMouseMove)
-    window.addEventListener('deviceorientation', this.handleDeviceOrientation)
+    // window.addEventListener('deviceorientation', this.handleDeviceOrientation)
     window.addEventListener('resize', this.handleResize)
     window.addEventListener('scroll', this.handleScroll)
   }
@@ -41,10 +41,10 @@ export class Panda extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('mouseout', this.handleMouseOut)
     document.removeEventListener('mousemove', this.handleMouseMove)
-    window.removeEventListener(
-      'deviceorientation',
-      this.handleDeviceOrientation
-    )
+    // window.removeEventListener(
+    //   'deviceorientation',
+    //   this.handleDeviceOrientation
+    // )
     window.removeEventListener('resize', this.handleResize)
     window.removeEventListener('scroll', this.handleScroll)
 
@@ -140,7 +140,8 @@ export class Panda extends React.Component {
   }
 
   handleDeviceOrientation = event => {
-    this.mousePosition = (new THREE.Vector2(event.gamma, event.beta))
+    this.inside = true
+    this.mousePosition = new THREE.Vector2(event.gamma, event.beta)
       .clampLength(0, 50)
   }
 
