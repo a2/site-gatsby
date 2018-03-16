@@ -5,17 +5,21 @@ import { Container } from 'react-responsive-grid'
 import { Panda } from '../components'
 import { rhythm, scale } from '../utils/typography'
 
+const CenteredPanda = props => (
+  <div style={{ margin: '0 auto', width: props.size, height: props.size }}>
+    <Panda size={props.size} />
+  </div>
+)
+
 class Template extends React.Component {
   render() {
-    const { location, children } = this.props
-
-    let rootPath = `/`
-    if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
-      rootPath = __PATH_PREFIX__ + `/`
+    let rootPath = '/'
+    if (typeof __PREFIX_PATHS__ !== 'undefined' && __PREFIX_PATHS__) {
+      rootPath = __PATH_PREFIX__ + '/'
     }
 
     let Header
-    if (location.pathname === rootPath) {
+    if (this.props.location.pathname === rootPath) {
       Header = ({ children }) => (
         <h1
           style={{
@@ -48,23 +52,21 @@ class Template extends React.Component {
         }}
       >
         <Header>
-          <Link
-            style={{
-              boxShadow: 'none',
-              textDecoration: 'none',
-              color: 'inherit',
-            }}
-            to={'/'}
-          >
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ margin: '0 auto', width: 150, height: 150 }}>
-                <Panda size={150} />
-              </div>
-              <div>Alexsander Akers</div>
-            </div>
-          </Link>
+          <CenteredPanda size={150} />
+          <div style={{ textAlign: 'center' }}>
+            <Link
+              style={{
+                boxShadow: 'none',
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={'/'}
+            >
+              Alexsander Akers
+            </Link>
+          </div>
         </Header>
-        {children()}
+        {this.props.children()}
       </Container>
     )
   }
