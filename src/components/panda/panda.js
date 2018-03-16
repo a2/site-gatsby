@@ -29,7 +29,10 @@ export class Panda extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('mouseout', this.handleMouseOut)
     document.removeEventListener('mousemove', this.handleMouseMove)
-    window.removeEventListener('deviceorientation', this.handleDeviceOrientation)
+    window.removeEventListener(
+      'deviceorientation',
+      this.handleDeviceOrientation
+    )
     window.removeEventListener('resize', this.handleResize)
     window.removeEventListener('scroll', this.handleScroll)
 
@@ -82,8 +85,8 @@ export class Panda extends React.Component {
     const { x: newX, y: newY } = this.cameraPosition
     const { x: oldX, y: oldY } = this.camera.position
 
-    this.camera.position.x += ((-newX) - oldX) * 15 * delta
-    this.camera.position.y += ((newY + sceneY) - oldY) * 15 * delta
+    this.camera.position.x += (-newX - oldX) * 15 * delta
+    this.camera.position.y += (newY + sceneY - oldY) * 15 * delta
     this.camera.position.z = 50
 
     this.camera.lookAt(this.scene.position)
@@ -120,13 +123,18 @@ export class Panda extends React.Component {
 
   handleResize = event => {
     const rect = this.canvas.getBoundingClientRect()
-    this.canvasCenter = new THREE.Vector2(rect.x + rect.width / 2, rect.y + rect.height / 2)
+    this.canvasCenter = new THREE.Vector2(
+      rect.x + rect.width / 2,
+      rect.y + rect.height / 2
+    )
     this.updateCoordinate()
   }
 
   handleDeviceOrientation = event => {
-    this.mousePosition = new THREE.Vector2(event.gamma, event.beta)
-      .clampLength(0, 50)
+    this.mousePosition = new THREE.Vector2(event.gamma, event.beta).clampLength(
+      0,
+      50
+    )
     this.updateCoordinate()
   }
 

@@ -27,9 +27,9 @@ export class Bio extends React.Component {
           }}
         />
         <p>
-          An American expat in Berlin, <strong>Alex</strong> works
-          on <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both
-          iOS and macOS. He is very enthusiastic about pandas.
+          An American expat in Berlin, <strong>Alex</strong> works on{' '}
+          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both iOS
+          and macOS. He is very enthusiastic about pandas.
         </p>
       </div>
     )
