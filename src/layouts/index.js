@@ -20,18 +20,18 @@ class Template extends React.Component {
 
     let Header
     if (this.props.location.pathname === rootPath) {
-      Header = ({ children }) => (
+      Header = props => (
         <h1
           style={{
-            marginBottom: rhythm(1.5),
             marginTop: 0,
+            marginBottom: rhythm(1.5),
           }}
         >
-          {children}
+          {props.children}
         </h1>
       )
     } else {
-      Header = ({ children }) => (
+      Header = props => (
         <h3
           style={{
             fontFamily: 'Montserrat, sans-serif',
@@ -39,7 +39,7 @@ class Template extends React.Component {
             marginBottom: rhythm(-1),
           }}
         >
-          {children}
+          {props.children}
         </h3>
       )
     }
