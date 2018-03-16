@@ -8,12 +8,14 @@ export class Panda extends React.Component {
   constructor() {
     super()
 
+    this.clock = new THREE.Clock()
     this.mousePosition = new THREE.Vector2()
     this.canvasCenter = new THREE.Vector2()
     this.scrollPosition = new THREE.Vector2()
   }
 
   componentDidMount() {
+    document.addEventListener('mouseout', this.handleMouseOut)
     document.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('deviceorientation', this.handleDeviceOrientation)
     window.addEventListener('resize', this.handleResize)
@@ -25,6 +27,7 @@ export class Panda extends React.Component {
   }
 
   componentWillUnmount() {
+    document.removeEventListener('mouseout', this.handleMouseOut)
     document.removeEventListener('mousemove', this.handleMouseMove)
     window.removeEventListener('deviceorientation', this.handleDeviceOrientation)
     window.removeEventListener('resize', this.handleResize)
@@ -74,8 +77,15 @@ export class Panda extends React.Component {
   }
 
   renderScene = () => {
-    const { x, y } = this.cameraPosition
-    this.camera.position.set(-x, y + this.scene.position.y, 50)
+    const delta = this.clock.getDelta()
+    const sceneY = this.scene.position.y
+    const { x: newX, y: newY } = this.cameraPosition
+    const { x: oldX, y: oldY } = this.camera.position
+
+    this.camera.position.x += ((-newX) - oldX) * 15 * delta
+    this.camera.position.y += ((newY + sceneY) - oldY) * 15 * delta
+    this.camera.position.z = 50
+
     this.camera.lookAt(this.scene.position)
     this.renderer.render(this.scene, this.camera)
   }
@@ -85,17 +95,27 @@ export class Panda extends React.Component {
     this.updateCoordinate()
   }
 
+  handleMouseOut = event => {
+    this.inside = false
+    this.mousePosition = new THREE.Vector2()
+    this.updateCoordinate()
+  }
+
   handleMouseMove = event => {
+    this.inside = true
     this.mousePosition = new THREE.Vector2(event.clientX, event.clientY)
     this.updateCoordinate()
   }
 
   updateCoordinate = () => {
     this.cameraPosition = new THREE.Vector2()
-      .add(this.mousePosition)
-      .add(this.scrollPosition)
-      .sub(this.canvasCenter)
-      .divideScalar(30)
+    if (this.inside) {
+      this.cameraPosition
+        .add(this.mousePosition)
+        .add(this.scrollPosition)
+        .sub(this.canvasCenter)
+        .divideScalar(30)
+    }
   }
 
   handleResize = event => {
