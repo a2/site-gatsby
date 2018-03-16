@@ -1,10 +1,10 @@
 import React from 'react'
 import * as THREE from 'three'
 
-import panda from '../puppets/panda'
-import pandaFallback from '../puppets/panda_fallback.png'
+import model from './model'
+import fallback from './fallback.png'
 
-class Panda extends React.Component {
+export class Panda extends React.Component {
   constructor() {
     super()
 
@@ -49,7 +49,7 @@ class Panda extends React.Component {
     camera.add(pointLight)
 
     const loader = new THREE.ObjectLoader()
-    loader.parse(panda, puppet => {
+    loader.parse(model, puppet => {
       const center = new THREE.Vector3()
       new THREE.Box3().setFromObject(puppet).getCenter(center)
       scene.position.y = center.y
@@ -114,7 +114,7 @@ class Panda extends React.Component {
     return (
       <canvas ref={e => (this.canvas = e)}>
         <img
-          src={pandaFallback}
+          src={fallback}
           alt="Panda"
           width={this.props.size}
           height={this.props.size}
