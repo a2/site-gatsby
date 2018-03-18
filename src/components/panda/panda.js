@@ -2,7 +2,7 @@ import React from 'react'
 import * as THREE from 'three'
 
 import model from './model'
-import fallback from './fallback.png'
+import fallback from './fallback.jpg'
 
 export class Panda extends React.Component {
   constructor() {
