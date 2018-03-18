@@ -7,7 +7,7 @@ import { rhythm, scale } from '../utils/typography'
 
 const CenteredPanda = props => (
   <div style={{ margin: '0 auto', width: props.size, height: props.size }}>
-    <Panda size={props.size} />
+    <Panda {...props} />
   </div>
 )
 
@@ -27,6 +27,7 @@ class Template extends React.Component {
             marginBottom: rhythm(1.5),
           }}
         >
+          <CenteredPanda animate={true} size={150} />
           {props.children}
         </h1>
       )
@@ -39,6 +40,7 @@ class Template extends React.Component {
             marginBottom: rhythm(-1),
           }}
         >
+          <CenteredPanda animate={false} size={100} />
           {props.children}
         </h3>
       )
@@ -52,7 +54,6 @@ class Template extends React.Component {
         }}
       >
         <Header>
-          <CenteredPanda size={150} />
           <div style={{ textAlign: 'center' }}>
             <Link
               style={{

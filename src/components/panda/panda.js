@@ -17,9 +17,11 @@ export class Panda extends React.Component {
   }
 
   componentDidMount() {
-    new THREE.ObjectLoader().parse(model, puppet => {
-      this.setState({ puppet })
-    })
+    if (this.props.animate) {
+      new THREE.ObjectLoader().parse(model, puppet => {
+        this.setState({ puppet })
+      })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -146,7 +148,7 @@ export class Panda extends React.Component {
     if (this.state.puppet) {
       return <canvas ref={ref => (this.canvas = ref)}>{image}</canvas>
     } else {
-      return <div>{image}</div>
+      return image
     }
   }
 }
