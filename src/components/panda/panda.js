@@ -123,6 +123,7 @@ export class Panda extends React.Component {
         .add(this.scrollPosition)
         .sub(this.canvasCenter)
         .divideScalar(30)
+        .clampLength(0, 30)
     } else {
       return new THREE.Vector2()
     }
