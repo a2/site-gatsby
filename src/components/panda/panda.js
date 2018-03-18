@@ -133,16 +133,14 @@ export class Panda extends React.Component {
 
   handleResize = event => {
     const rect = this.canvas.getBoundingClientRect()
-    this.canvasCenter = new THREE.Vector2(
-      rect.x + rect.width / 2,
-      rect.y + rect.height / 2
-    )
+    this.canvasCenter = new THREE.Vector2(rect.x, rect.y)
+    this.canvasCenter.addScalar(this.props.size / 2)
   }
 
   handleDeviceOrientation = event => {
     this.inside = true
     this.mousePosition = new THREE.Vector2(event.gamma, event.beta)
-      .clampLength(0, 50)
+    this.mousePosition.clampLength(0, 50)
   }
 
   render() {
