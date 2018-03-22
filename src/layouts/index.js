@@ -11,6 +11,10 @@ const CenteredPanda = props => (
   </div>
 )
 
+const CenteredText = props => (
+  <div style={{ textAlign: 'center' }}>{props.children}</div>
+)
+
 class Template extends React.Component {
   render() {
     let rootPath = '/'
@@ -20,7 +24,7 @@ class Template extends React.Component {
 
     let Header
     if (this.props.location.pathname === rootPath) {
-      Header = props => (
+      Header = () => (
         <h1
           style={{
             marginTop: 0,
@@ -28,11 +32,11 @@ class Template extends React.Component {
           }}
         >
           <CenteredPanda animate={true} size={150} />
-          {props.children}
+          <CenteredText>Alexsander Akers</CenteredText>
         </h1>
       )
     } else {
-      Header = props => (
+      Header = () => (
         <h3
           style={{
             fontFamily: 'Montserrat, sans-serif',
@@ -40,8 +44,20 @@ class Template extends React.Component {
             marginBottom: rhythm(-1),
           }}
         >
-          <CenteredPanda animate={false} size={100} />
-          {props.children}
+          <CenteredText>
+            <Link
+              style={{
+                boxShadow: 'none',
+                textDecoration: 'none',
+                color: 'inherit',
+              }}
+              to={'/'}
+            >
+              <Panda animate={false} size={100} />
+              <br />
+              Alexsander Akers
+            </Link>
+          </CenteredText>
         </h3>
       )
     }
@@ -53,20 +69,7 @@ class Template extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <Header>
-          <div style={{ textAlign: 'center' }}>
-            <Link
-              style={{
-                boxShadow: 'none',
-                textDecoration: 'none',
-                color: 'inherit',
-              }}
-              to={'/'}
-            >
-              Alexsander Akers
-            </Link>
-          </div>
-        </Header>
+        <Header />
         {this.props.children()}
       </Container>
     )
