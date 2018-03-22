@@ -43,21 +43,21 @@ class BlogPostTemplate extends React.Component {
             padding: 0,
           }}
         >
-          {previous && (
-            <li>
+          <li>
+            {previous && (
               <Link to={previous.fields.slug} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
-            </li>
-          )}
+            )}
+          </li>
 
-          {next && (
-            <li>
+          <li>
+            {next && (
               <Link to={next.fields.slug} rel="next">
                 {next.frontmatter.title} →
               </Link>
-            </li>
-          )}
+            )}
+          </li>
         </ul>
       </div>
     )
