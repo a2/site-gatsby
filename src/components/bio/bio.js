@@ -25,7 +25,7 @@ export class Bio extends React.Component {
         <p>
           Alex works in Berlin on{' '}
           <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both iOS
-          and macOS. He is very enthusiastic about pandas. Follow him on{' '}
+          and macOS.<br />He is very enthusiastic about pandas. Follow him on{' '}
           <a href="https://twitter.com/a2">Twitter</a>.
         </p>
       </div>
