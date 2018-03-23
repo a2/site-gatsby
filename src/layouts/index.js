@@ -5,6 +5,8 @@ import { Container } from 'react-responsive-grid'
 import { Panda } from '../components'
 import { rhythm, scale } from '../utils/typography'
 
+import 'prism-github/prism-github.css'
+
 const CenteredPanda = props => (
   <div style={{ margin: '0 auto', width: props.size, height: props.size }}>
     <Panda {...props} />
