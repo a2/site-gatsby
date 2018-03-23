@@ -1,10 +1,10 @@
 {
-  "name": "gatsby-starter-blog",
-  "description": "Starter Gatsby Blog",
+  "name": "a2.io",
+  "description": "The personal website and blog of Alexsander Akers.",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Alexsander Akers <me@a2.io>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+    "url": "https://github.com/a2/gatsby-website/issues"
   },
   "dependencies": {
     "gatsby": "^1.9.223",
@@ -37,7 +37,7 @@
     "eslint-plugin-react": "^7.7.0",
     "prettier": "^1.11.1"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/a2/gatsby-website#readme",
   "keywords": [
     "gatsby"
   ],
@@ -45,7 +45,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/a2/gatsby-website.git"
   },
   "scripts": {
     "dev": "gatsby develop",
