@@ -14,7 +14,7 @@ export class Bio extends React.Component {
       >
         <img
           src={profilePic}
-          alt={'Alexsander Akers'}
+          alt="Alexsander Akers"
           style={{
             marginRight: rhythm(1 / 2),
             marginBottom: 0,
@@ -23,9 +23,10 @@ export class Bio extends React.Component {
           }}
         />
         <p>
-          An American expat in Berlin, <strong>Alex</strong> works on{' '}
+          Alex works in Berlin on{' '}
           <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for both iOS
-          and macOS. He is very enthusiastic about pandas.
+          and macOS. He is very enthusiastic about pandas. Follow him on{' '}
+          <a href="https://twitter.com/a2">Twitter</a>.
         </p>
       </div>
     )
