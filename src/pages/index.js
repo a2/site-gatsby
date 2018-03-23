@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 
 import { Bio, PostExcerpt } from '../components'
 
-class BlogIndex extends React.Component {
+export default class BlogIndex extends React.Component {
   render() {
     const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
@@ -19,8 +19,6 @@ class BlogIndex extends React.Component {
     )
   }
 }
-
-export default BlogIndex
 
 export const pageQuery = graphql`
   query IndexQuery {
