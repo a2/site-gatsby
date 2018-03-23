@@ -9,6 +9,7 @@ import { rhythm, scale } from '../utils/typography'
 
 class TagsTemplate extends React.Component {
   render() {
+    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const { tag } = this.props.pathContext
     const { edges, totalCount } = this.props.data.allMarkdownRemark
     const tagHeader = `${totalCount} post${
@@ -17,6 +18,7 @@ class TagsTemplate extends React.Component {
 
     return (
       <div>
+        <Helmet title={`${tag} | ${siteTitle}`} />
         <h1>{tagHeader}</h1>
         <ul style={{ listStyle: 'none' }}>
           {edges.map(({ node }) => (
@@ -56,6 +58,11 @@ export default TagsTemplate
 
 export const pageQuery = graphql`
   query Tag($tag: String) {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }
