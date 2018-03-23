@@ -58,9 +58,9 @@ For a business card, the _boardingPass_ and _eventTicket_ styles do not make so 
 
 ## Making My Pass
 
-My pass's JSON payload, with keys reordered and grouped for clarity:
+My pass's JSON payload, with added comments and keys reordered and grouped for clarity:
 
-```js
+```json
 {
   // must be 1
   "formatVersion": 1,
