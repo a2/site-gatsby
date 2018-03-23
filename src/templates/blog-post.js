@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
+import kebabCase from 'lodash/kebabCase'
 
 import { Bio } from '../components'
 import { rhythm, scale } from '../utils/typography'
@@ -12,21 +13,47 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const { previous, next } = this.props.pathContext
 
+    const { title, date, tags } = post.frontmatter
     return (
       <div>
-        <Helmet title={`${post.frontmatter.title} | ${siteTitle}`} />
-        <h1>{post.frontmatter.title}</h1>
+        <Helmet title={`${title} | ${siteTitle}`} />
+        <h1>{title}</h1>
         <p
           style={{
             ...scale(-1 / 5),
             display: 'block',
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
+            marginBottom: rhythm(0),
+            marginTop: rhythm(-3 / 4),
           }}
         >
-          {post.frontmatter.date}
+          {date}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        {tags && (
+          <p
+            style={{
+              ...scale(-1 / 5),
+              display: 'block',
+              marginBottom: rhythm(0),
+            }}
+          >
+            <ul style={{ display: 'inline' }}>
+              {tags.sort().map((tag, i) => (
+                <li
+                  style={{
+                    display: 'inline',
+                    marginLeft: i > 0 ? rhythm(1 / 4) : 0,
+                  }}
+                >
+                  <Link to={`/tags/${kebabCase(tag)}`}>{tag}</Link>
+                </li>
+              ))}
+            </ul>
+          </p>
+        )}
+        <div
+          style={{ marginTop: rhythm(1) }}
+          dangerouslySetInnerHTML={{ __html: post.html }}
+        />
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -79,6 +106,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        tags
       }
     }
   }

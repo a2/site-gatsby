@@ -1,6 +1,7 @@
 ---
 title: Swiftly Passcards
 date: "2017-05-15"
+tags: ["wallet", "passbook", "swift", "server", "development", "iOS"]
 ---
 
 ![A sepia-tone image of an old, tattered business card. It reads: Yours for Business and Success; Charles M. Wright, Expert Pension and Claim Attorney; Fifteen Years' Experience; Best of References; Wapello, Iowa](./business-card.jpeg)

@@ -8,11 +8,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve('./src/templates/blog-post.js')
+    const tagTemplate = path.resolve('./src/templates/tags.js')
+
     resolve(
       graphql(
         `
           {
-            allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+            allMarkdownRemark(
+              sort: { fields: [frontmatter___date], order: DESC }
+              limit: 1000
+            ) {
               edges {
                 node {
                   fields {
@@ -20,6 +25,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                   frontmatter {
                     title
+                    tags
                   }
                 }
               }
@@ -34,9 +40,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
         // Create blog posts pages.
         const posts = result.data.allMarkdownRemark.edges
-
         _.each(posts, (post, index) => {
-          const previous = index === posts.length - 1 ? false : posts[index + 1].node
+          const previous =
+            index === posts.length - 1 ? false : posts[index + 1].node
           const next = index === 0 ? false : posts[index - 1].node
 
           createPage({
@@ -46,6 +52,28 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               slug: post.node.fields.slug,
               previous,
               next,
+            },
+          })
+        })
+
+        // Tag pages.
+        let tags = []
+        _.each(posts, post => {
+          if (_.get(post, 'node.frontmatter.tags')) {
+            tags = tags.concat(post.node.frontmatter.tags)
+          }
+        })
+
+        // Eliminate duplicate tags
+        tags = _.uniq(tags)
+
+        // Make tag pages
+        _.each(tags, tag => {
+          createPage({
+            path: `/tags/${_.kebabCase(tag)}/`,
+            component: tagTemplate,
+            context: {
+              tag,
             },
           })
         })
