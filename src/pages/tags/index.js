@@ -6,11 +6,12 @@ import kebabCase from 'lodash/kebabCase'
 
 class TagsPage extends React.Component {
   render() {
-    const title = this.props.data.site.title
-    const group = this.props.data.allMarkdownRemark.group
+    const { data } = this.props
+    const siteTitle = data.site.siteMetadata.title
+    const group = data.allMarkdownRemark.group
     return (
       <div>
-        <Helmet title={this.props.title} />
+        <Helmet title={`All Tags | ${siteTitle}`} />
         <div>
           <h1>Tags</h1>
           <ul>
