@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-import kebabCase from 'lodash/kebabCase'
+
+import tagify from '../../utils/tagify'
 
 class TagsPage extends React.Component {
   render() {
@@ -17,7 +18,7 @@ class TagsPage extends React.Component {
           <ul>
             {group.map(tag => (
               <li key={tag.fieldValue}>
-                <Link to={`/tags/${kebabCase(tag.fieldValue)}/`}>
+                <Link to={`/tags/${tagify(tag.fieldValue)}/`}>
                   {tag.fieldValue}
                 </Link>{' '}
                 ({tag.totalCount})

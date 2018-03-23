@@ -2,10 +2,10 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
-import kebabCase from 'lodash/kebabCase'
 
 import { Bio } from '../components'
 import { rhythm, scale } from '../utils/typography'
+import tagify from '../utils/tagify';
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -45,7 +45,7 @@ class BlogPostTemplate extends React.Component {
                   marginLeft: i > 0 ? rhythm(1 / 4) : 0,
                 }}
               >
-                <Link to={`/tags/${kebabCase(tag)}`}>{tag}</Link>
+                <Link to={`/tags/${tagify(tag)}`}>{tag}</Link>
               </li>
             ))}
           </ul>

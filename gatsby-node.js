@@ -3,6 +3,8 @@ const Promise = require('bluebird')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
+const tagify = tag => (tag === 'iOS' ? 'ios' : _.kebabCase(tag))
+
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
@@ -70,7 +72,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         // Make tag pages
         _.each(tags, tag => {
           createPage({
-            path: `/tags/${_.kebabCase(tag)}/`,
+            path: `/tags/${tagify(tag)}/`,
             component: tagTemplate,
             context: {
               tag,
