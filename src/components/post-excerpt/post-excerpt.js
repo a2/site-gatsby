@@ -30,8 +30,15 @@ export class PostExcerpt extends React.Component {
             marginBottom: rhythm(0),
           }}
         >
-          {post.frontmatter.date}
+          Published on {post.frontmatter.date}
         </p>
+        <p
+          style={{
+            marginTop: rhythm(1 / 2),
+            marginBottom: rhythm(1 / 2),
+          }}
+          dangerouslySetInnerHTML={{ __html: post.excerpt }}
+        />
         {tags && (
           <ul
             style={{
@@ -40,6 +47,7 @@ export class PostExcerpt extends React.Component {
               display: 'inline',
             }}
           >
+            Tags:{' '}
             {tags.sort().map((tag, i) => (
               <li
                 key={tag}
@@ -53,12 +61,6 @@ export class PostExcerpt extends React.Component {
             ))}
           </ul>
         )}
-        <p
-          style={{
-            marginTop: rhythm(1 / 2),
-          }}
-          dangerouslySetInnerHTML={{ __html: post.excerpt }}
-        />
       </div>
     )
   }
