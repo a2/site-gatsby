@@ -12,8 +12,8 @@ class BlogPostTemplate extends React.Component {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const { previous, next } = this.props.pathContext
-
     const { title, date, tags } = post.frontmatter
+
     return (
       <div>
         <Helmet title={`${title} | ${siteTitle}`} />
@@ -29,26 +29,26 @@ class BlogPostTemplate extends React.Component {
           {date}
         </p>
         {tags && (
-          <p
+          <ul
             style={{
               ...scale(-1 / 5),
               display: 'block',
               marginBottom: rhythm(0),
+              display: 'inline',
             }}
           >
-            <ul style={{ display: 'inline' }}>
-              {tags.sort().map((tag, i) => (
-                <li
-                  style={{
-                    display: 'inline',
-                    marginLeft: i > 0 ? rhythm(1 / 4) : 0,
-                  }}
-                >
-                  <Link to={`/tags/${kebabCase(tag)}`}>{tag}</Link>
-                </li>
-              ))}
-            </ul>
-          </p>
+            {tags.sort().map((tag, i) => (
+              <li
+                key={tag}
+                style={{
+                  display: 'inline',
+                  marginLeft: i > 0 ? rhythm(1 / 4) : 0,
+                }}
+              >
+                <Link to={`/tags/${kebabCase(tag)}`}>{tag}</Link>
+              </li>
+            ))}
+          </ul>
         )}
         <div
           style={{ marginTop: rhythm(1) }}
