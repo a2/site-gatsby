@@ -20,7 +20,7 @@ export default class FourOhFour extends React.Component {
           but unfortunately it could not be found.
         </p>
         <p>Here are a few recent blog posts that may interest you though:</p>
-        <ul style={{ listStyle: 'none' }}>
+        <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {posts.map(({ node }) => (
             <li key={node.fields.slug}>
               <PostExcerpt post={node} />

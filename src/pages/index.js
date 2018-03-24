@@ -14,7 +14,7 @@ export default class BlogIndex extends React.Component {
       <div>
         <Helmet title={siteTitle} />
         <Bio />
-        <ul style={{ listStyle: 'none' }}>
+        <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {posts.map(({ node }) => (
             <li key={node.frontmatter.path}>
               <PostExcerpt post={node} />

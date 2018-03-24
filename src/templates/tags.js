@@ -20,7 +20,7 @@ class TagsTemplate extends React.Component {
       <div>
         <Helmet title={`${tag} | ${siteTitle}`} />
         <h1>{tagHeader}</h1>
-        <ul style={{ listStyle: 'none' }}>
+        <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {edges.map(({ node }) => (
             <li key={node.frontmatter.path}>
               <PostExcerpt post={node} />
