@@ -14,7 +14,7 @@ class TagsTemplate extends React.Component {
     const { edges, totalCount } = this.props.data.allMarkdownRemark
     const tagHeader = `${totalCount} post${
       totalCount === 1 ? '' : 's'
-    } tagged\n"${tag}"`
+    } tagged “${tag}”`
 
     return (
       <div>
