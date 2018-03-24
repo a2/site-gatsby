@@ -57,7 +57,7 @@ TagsTemplate.propTypes = {
 export default TagsTemplate
 
 export const pageQuery = graphql`
-  query Tag($tag: String) {
+  query TagTemplate($tag: String) {
     site {
       siteMetadata {
         title
