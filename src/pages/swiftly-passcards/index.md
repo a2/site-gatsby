@@ -24,11 +24,11 @@ When I started this project years ago, I concentrated my efforts to write a web 
 
 A pass is a ZIP archive containing the following files:
 
-- **_pass.json_** The pass payload in JSON format. More information about its structure can be found in the [PassKit Package Format Reference](https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/Introduction.html).
-- **_manifest.json_** A JSON object keyed by file path (relative to bundle root) and whose values are SHA-1 digest hashes of those files. All files must be listed, except _manifest.json_ and _signature_.
-- **_signature_** A detached PKCS#7 signature of manifest.json, signed with your Pass Type ID certificate.
-- **Optional images** such as _background.png_, _footer.png_, _icon.png_, _logo.png_, _strip.png_, _thumbnail.png_. The images supported by a pass is dependent on the pass’s type.
-- **Localized resources** organized into _*.lproj_ directories, not unlike in Apple platform apps.
+* **_pass.json_** The pass payload in JSON format. More information about its structure can be found in the [PassKit Package Format Reference](https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/Introduction.html).
+* **_manifest.json_** A JSON object keyed by file path (relative to bundle root) and whose values are SHA-1 digest hashes of those files. All files must be listed, except _manifest.json_ and _signature_.
+* **_signature_** A detached PKCS#7 signature of manifest.json, signed with your Pass Type ID certificate.
+* **Optional images** such as _background.png_, _footer.png_, _icon.png_, _logo.png_, _strip.png_, _thumbnail.png_. The images supported by a pass is dependent on the pass’s type.
+* **Localized resources** organized into _\*.lproj_ directories, not unlike in Apple platform apps.
 
 The _manifest.json_ file contains cryptographic digest "fingerprints" of every file in the pass, and the _signature_ file is a cryptographic signature that verifies the pass’s authenticity. The _signature_ is "detached" in that it itself does not contain the signed data. The abbreviation _PKCS_ stands for _Public Key Cryptography Standards_ (hopefully self-explanatory) developed by RSA Security Inc. The signing algorithm uses the seventh such standard and is formally defined by [RFC 2315](https://tools.ietf.org/html/rfc2315) (_Cryptographic Message Syntax_).
 
@@ -87,9 +87,9 @@ My pass's JSON payload, with added comments and keys reordered and grouped for c
   "organizationName": "Alexsander Akers",
 
   // style colors as rgb strings
-  "backgroundColor": "rgb(0, 168, 143)",   // #00a88f
+  "backgroundColor": "rgb(0, 168, 143)", // #00a88f
   "foregroundColor": "rgb(255, 255, 255)", // white
-  "labelColor":      "rgb(255, 255, 255)", // white
+  "labelColor": "rgb(255, 255, 255)", // white
 
   // style key
   "storeCard": {
@@ -113,7 +113,7 @@ My pass's JSON payload, with added comments and keys reordered and grouped for c
 }
 ```
 
-For each field (whether in _primaryFields_, _secondaryFields_, _auxiliaryFields_, _headerFields_ or _backFields_), the _key_ key is required and must be unique in the pass. A _value_ is also required, but can be localized (translated) through a locale-specific _Localizable.strings_ file in an _*.lproj_ subdirectory (e.g. *en_US.lproj* for American English).
+For each field (whether in _primaryFields_, _secondaryFields_, _auxiliaryFields_, _headerFields_ or _backFields_), the _key_ key is required and must be unique in the pass. A _value_ is also required, but can be localized (translated) through a locale-specific _Localizable.strings_ file in an _\*.lproj_ subdirectory (e.g. _en_US.lproj_ for American English).
 
 For example, you can override a value with "Hello, world!" in the English _Localizable.strings_ file and "Hallo, Welt!" in the German _Localizable.strings_ file, and so on. Number formatting is available through optional _numberStyle_ and _currencyCode_, and date formatting through the _dateStyle_, _ignoresTimeZone_, _isRelative_, and _timeStyle_ keys. More information about that can be found on the [Field Dictionary Keys](https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html#//apple_ref/doc/uid/TP40012026-CH4-SW1) page.
 
@@ -121,4 +121,4 @@ After the payload is written, we get to the images. I included _icon.png_, _logo
 
 ## Uploading to Passcards
 
-Once you've done that, it's time to sign the pass, using the _signpass_ utility from Apple (unless you're feeling adventurous). Note that you can double click the resulting _*.pkass_ file on your Mac for a preview, although the UI is relatively outdated. Then you can upload the pass to Passcards with [this cURL command](https://github.com/a2/passcards-swift#uploading-a-pass) et voilà!
+Once you've done that, it's time to sign the pass, using the _signpass_ utility from Apple (unless you're feeling adventurous). Note that you can double click the resulting _\*.pkass_ file on your Mac for a preview, although the UI is relatively outdated. Then you can upload the pass to Passcards with [this cURL command](https://github.com/a2/passcards-swift#uploading-a-pass) et voilà!

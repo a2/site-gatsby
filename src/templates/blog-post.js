@@ -5,7 +5,7 @@ import get from 'lodash/get'
 
 import { Bio } from '../components'
 import { rhythm, scale } from '../utils/typography'
-import tagify from '../utils/tagify';
+import tagify from '../utils/tagify'
 
 class BlogPostTemplate extends React.Component {
   render() {
