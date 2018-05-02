@@ -1,15 +1,26 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
-import get from 'lodash/get'
+import Img from 'gatsby-image'
+import _ from 'lodash'
 
 import { Bio, PostExcerpt } from '../../components'
 import { rhythm, scale } from '../../utils/typography'
 
-export default class FourOhFour extends React.Component {
+export default class TalksPage extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const talks = get(this, 'props.data.allTalksJson.edges')
+    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
+    const talks = _.filter(
+      _.get(this, 'props.data.allMarkdownRemark.edges'),
+      edge => {
+        const slug = _.get(edge, 'node.fields.slug')
+        if (!slug) return
+
+        if (_.includes(slug, '/talks/')) {
+          return edge
+        }
+      }
+    )
 
     return (
       <div>
@@ -17,14 +28,15 @@ export default class FourOhFour extends React.Component {
         <h1>Talks</h1>
         <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {talks.map(({ node }) => (
-            <li key={node.title}>
+            <li key={node.frontmatter.title}>
+              <Img resolutions={node.frontmatter.image.childImageSharp.resolutions} />
               <h3
                 style={{
                   marginBottom: rhythm(1 / 4),
                 }}
               >
-                <a style={{ boxShadow: 'none' }} href={node.url}>
-                  {node.title}
+                <a style={{ boxShadow: 'none' }} href={node.frontmatter.url}>
+                  {node.frontmatter.title}
                 </a>
               </h3>
               <p
@@ -34,8 +46,8 @@ export default class FourOhFour extends React.Component {
                   marginBottom: rhythm(0),
                 }}
               >
-                <a style={{ boxShadow: 'none' }} href={node.venueUrl}>
-                  {node.venue}
+                <a style={{ boxShadow: 'none' }} href={node.frontmatter.venueUrl}>
+                  {node.frontmatter.venue}
                 </a>
               </p>
               <p
@@ -45,7 +57,7 @@ export default class FourOhFour extends React.Component {
                   marginBottom: rhythm(0),
                 }}
               >
-                {node.date}
+                {node.frontmatter.date}
               </p>
               <p
                 style={{
@@ -71,15 +83,30 @@ export const pageQuery = graphql`
         title
       }
     }
-    allTalksJson(sort: { fields: [date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 1000
+    ) {
       edges {
         node {
-          title
-          url
-          venue
-          venueUrl
-          date(formatString: "MMMM D, YYYY")
+          fields {
+            slug
+          }
           excerpt
+          frontmatter {
+            title
+            url
+            venue
+            venueUrl
+            date(formatString: "MMMM D, YYYY")
+            image {
+              childImageSharp {
+                resolutions(width: 200) {
+                  ...GatsbyImageSharpResolutions
+                }
+              }
+            }
+          }
         }
       }
     }

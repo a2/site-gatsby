@@ -41,44 +41,50 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
 
         // Create blog posts pages.
-        const posts = result.data.allMarkdownRemark.edges
-        _.each(posts, (post, index) => {
+        const blogPosts = _.filter(
+          result.data.allMarkdownRemark.edges,
+          edge => {
+            const slug = _.get(edge, 'node.fields.slug')
+            const draft = _.get(edge, `node.frontmatter.draft`)
+            if (!slug) return
+
+            if (_.includes(slug, '/blog/') && !draft) {
+              return edge
+            }
+          }
+        )
+
+        blogPosts.forEach((edge, index) => {
+          const next = index === 0 ? null : blogPosts[index - 1].node
           const previous =
-            index === posts.length - 1 ? false : posts[index + 1].node
-          const next = index === 0 ? false : posts[index - 1].node
+            index === blogPosts.length - 1 ? null : blogPosts[index + 1].node
+          const slug = edge.node.fields.slug
 
           createPage({
-            path: post.node.fields.slug,
+            path: slug,
             component: blogPost,
             context: {
-              slug: post.node.fields.slug,
+              slug,
               previous,
               next,
             },
           })
         })
 
-        // Tag pages.
-        let tags = []
-        _.each(posts, post => {
-          if (_.get(post, 'node.frontmatter.tags')) {
-            tags = tags.concat(post.node.frontmatter.tags)
-          }
-        })
+        const tagLists = blogPosts
+          .filter(post => _.get(post, 'node.frontmatter.tags'))
+          .map(post => _.get(post, 'node.frontmatter.tags'))
 
-        // Eliminate duplicate tags
-        tags = _.uniq(tags)
-
-        // Make tag pages
-        _.each(tags, tag => {
+        _.uniq(_.flatten(tagLists)).forEach(tag => {
           createPage({
-            path: `/tags/${tagify(tag)}/`,
+            path: `/blog/tags/${tagify(tag)}/`,
             component: tagTemplate,
             context: {
               tag,
             },
           })
         })
+
       })
     )
   })
