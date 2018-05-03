@@ -33,7 +33,10 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fields: { slug: { regex: "^/blog/" } } }
+    ) {
       edges {
         node {
           excerpt
