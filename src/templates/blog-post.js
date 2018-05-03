@@ -45,7 +45,7 @@ class BlogPostTemplate extends React.Component {
                   marginLeft: i > 0 ? rhythm(1 / 4) : 0,
                 }}
               >
-                <Link to={`/tags/${tagify(tag)}`}>{tag}</Link>
+                <Link to={`/blog/tags/${tagify(tag)}`}>{tag}</Link>
               </li>
             ))}
           </ul>
