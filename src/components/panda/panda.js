@@ -17,15 +17,13 @@ export class Panda extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.animate) {
-      new THREE.ObjectLoader().parse(model, puppet => {
-        this.setState({ puppet })
-      })
-    }
+    new THREE.ObjectLoader().parse(model, puppet => {
+      this.setState({ puppet })
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.animationFrame != null) {
+    if (this.animationFrame || !this.state.puppet || prevState.puppet) {
       return
     }
 

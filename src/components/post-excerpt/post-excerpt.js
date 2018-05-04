@@ -21,17 +21,18 @@ export class PostExcerpt extends React.Component {
         >
           <Link style={{ boxShadow: 'none' }} to={post.fields.slug}>
             {title}
-          </Link>
+          </Link>{' '}
+          <span
+            style={{
+              ...scale(-1 / 10),
+              display: 'inline-block',
+              paddingLeft: rhythm(0.5),
+              fontWeight: 'normal',
+            }}
+          >
+            {post.frontmatter.date}
+          </span>
         </h3>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: 'block',
-            marginBottom: rhythm(0),
-          }}
-        >
-          Published on {post.frontmatter.date}
-        </p>
         <p
           style={{
             marginTop: rhythm(1 / 2),

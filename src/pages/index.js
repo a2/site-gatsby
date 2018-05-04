@@ -1,23 +1,55 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import get from 'lodash/get'
 import Helmet from 'react-helmet'
+import _ from 'lodash'
 
 import { Bio, PostExcerpt } from '../components'
+import { rhythm, scale } from '../utils/typography'
 
-export default class BlogIndex extends React.Component {
+export default class SiteIndex extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
+    const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
         <Helmet title={siteTitle} />
-        <Bio />
-        <ul style={{ listStyle: 'none', marginLeft: 0 }}>
+
+        <h3>👋🏻&nbsp;&nbsp;Why, hello there!</h3>
+        <p>
+          I work in Berlin on Microsoft To-Do and occasionally give talks at
+          meet-ups and conferences. I'm very enthusiastic about pandas. You can
+          follow me <a href="https://twitter.com/a2">on Twitter</a>.
+        </p>
+
+        <h3>✏️&nbsp;&nbsp;Blog</h3>
+        <p>
+          I write stuff and this is filler text to make the line go longer and
+          maybe you would read about these blog posts that I’ve written below.
+        </p>
+
+        <ul style={{ listStyle: 'none', marginLeft: '1rem' }}>
           {posts.map(({ node }) => (
-            <li key={node.frontmatter.path}>
-              <PostExcerpt post={node} />
+            <li key={node.fields.slug}>
+              <Link
+                to={node.fields.slug}
+                style={{
+                  ...scale(1 / 5),
+                  color: '#9B9B9B',
+                  boxShadow: 'none',
+                }}
+              >
+                <strong>{node.frontmatter.title}</strong>
+                <small
+                  style={{
+                    ...scale(-1 / 10),
+                    display: 'inline-block',
+                    paddingLeft: rhythm(0.5),
+                  }}
+                >
+                  {node.frontmatter.date}
+                </small>
+              </Link>
             </li>
           ))}
         </ul>
@@ -39,14 +71,12 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          excerpt
           fields {
             slug
           }
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
-            tags
           }
         }
       }

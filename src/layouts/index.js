@@ -13,55 +13,67 @@ const CenteredPanda = props => (
   </div>
 )
 
-const CenteredText = props => (
-  <div style={{ textAlign: 'center' }}>{props.children}</div>
-)
-
 class Template extends React.Component {
-  render() {
+  rootPath() {
     let rootPath = '/'
     if (typeof __PREFIX_PATHS__ !== 'undefined' && __PREFIX_PATHS__) {
       rootPath = __PATH_PREFIX__ + '/'
     }
+    return rootPath
+  }
 
-    let Header
-    if (this.props.location.pathname === rootPath) {
-      Header = () => (
-        <h1
+  renderNavigation() {
+    const NavLink = props => {
+      const location = this.props.location.pathname
+      let isActive
+      if (props.to === '/') {
+        isActive = location === '/'
+      } else {
+        isActive = location.startsWith(props.to)
+      }      
+
+      return (
+        <Link
+          to={props.to}
           style={{
-            marginTop: 0,
-            marginBottom: rhythm(1.5),
+            ...(isActive ? { color: '#00A88F' } : { color: 'black' }),
+            ...scale(2 / 5),
+            boxShadow: 'none',
+            fontFamily: 'Montserrat',
+            fontWeight: 700,
           }}
         >
-          <CenteredPanda animate={true} size={150} />
-          <CenteredText>Alexsander Akers</CenteredText>
-        </h1>
-      )
-    } else {
-      Header = () => (
-        <h3
-          style={{
-            fontFamily: 'Montserrat, sans-serif',
-            marginTop: 0,
-          }}
-        >
-          <CenteredText>
-            <Link
-              style={{
-                boxShadow: 'none',
-                textDecoration: 'none',
-                color: 'inherit',
-              }}
-              to={'/'}
-            >
-              <Panda animate={false} size={100} />
-              <br />
-              Alexsander Akers
-            </Link>
-          </CenteredText>
-        </h3>
+          {props.children}
+        </Link>
       )
     }
+
+    const NavItem = props => {
+      const extraPadding = props.to === '/' ? 0 : rhythm(1)
+      return (
+        <li
+          key={props.to}
+          style={{ display: 'inline', paddingLeft: extraPadding }}
+        >
+          <NavLink to={props.to}>{props.children}</NavLink>
+        </li>
+      )
+    }
+
+    return (
+      <nav style={{ textAlign: 'center' }}>
+        <ul style={{ listStyle: 'none' }}>
+          <NavItem to="/">Home</NavItem>
+          <NavItem to="/blog">Blog</NavItem>
+          <NavItem to="/contact">Contact</NavItem>
+          <NavItem to="/talks">Talks</NavItem>
+        </ul>
+      </nav>
+    )
+  }
+
+  render() {
+    const isRoot = this.props.location.pathname === this.rootPath()
 
     return (
       <Container
@@ -70,7 +82,19 @@ class Template extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <Header />
+        <header style={{ margin: `0 auto ${rhythm(1.5)}` }}>
+          <CenteredPanda animate={isRoot} size={150} />
+          <h1
+            style={{
+              textAlign: 'center',
+              marginTop: 0,
+              marginBottom: rhythm(0.5),
+            }}
+          >
+            Alexsander Akers
+          </h1>
+          {this.renderNavigation()}
+        </header>
         {this.props.children()}
       </Container>
     )

@@ -27,7 +27,7 @@ class TagsTemplate extends React.Component {
             </li>
           ))}
         </ul>
-        <Link to="/tags">All Tags</Link>
+        <Link to="/blog/tags">All Tags</Link>
       </div>
     )
   }

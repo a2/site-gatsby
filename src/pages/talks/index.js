@@ -10,28 +10,27 @@ import { rhythm, scale } from '../../utils/typography'
 export default class TalksPage extends React.Component {
   render() {
     const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
-    const talks = _.filter(
-      _.get(this, 'props.data.allMarkdownRemark.edges'),
-      edge => {
-        const slug = _.get(edge, 'node.fields.slug')
-        if (!slug) return
-
-        if (_.includes(slug, '/talks/')) {
-          return edge
-        }
-      }
-    )
+    const talks = _.get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
         <Helmet title={`Talks | ${siteTitle}`} />
-        <h1>Talks</h1>
         <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {talks.map(({ node }) => (
-            <li key={node.frontmatter.title}>
-              <Img resolutions={node.frontmatter.image.childImageSharp.resolutions} />
+            <li
+              key={node.frontmatter.title}
+              style={{ marginBottom: rhythm(2) }}
+            >
+              <Img
+                resolutions={node.frontmatter.image.childImageSharp.resolutions}
+                style={{
+                  border: '1px solid rgba(0, 0, 0, 0.1)',
+                  borderRadius: 10,
+                }}
+              />
               <h3
                 style={{
+                  marginTop: rhythm(1 / 4),
                   marginBottom: rhythm(1 / 4),
                 }}
               >
@@ -46,17 +45,13 @@ export default class TalksPage extends React.Component {
                   marginBottom: rhythm(0),
                 }}
               >
-                <a style={{ boxShadow: 'none' }} href={node.frontmatter.venueUrl}>
-                  {node.frontmatter.venue}
+                <a
+                  style={{ boxShadow: 'none' }}
+                  href={node.frontmatter.venueUrl}
+                >
+                  <strong>{node.frontmatter.venue}</strong>
                 </a>
-              </p>
-              <p
-                style={{
-                  ...scale(-1 / 5),
-                  display: 'block',
-                  marginBottom: rhythm(0),
-                }}
-              >
+                {' – '}
                 {node.frontmatter.date}
               </p>
               <p
@@ -64,13 +59,11 @@ export default class TalksPage extends React.Component {
                   marginTop: rhythm(1 / 2),
                   marginBottom: rhythm(1 / 2),
                 }}
-                dangerouslySetInnerHTML={{ __html: node.excerpt }}
+                dangerouslySetInnerHTML={{ __html: node.html }}
               />
             </li>
           ))}
         </ul>
-        <hr />
-        <Bio />
       </div>
     )
   }
@@ -86,13 +79,14 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 1000
+      filter: { fields: { slug: { regex: "^/talks/" } } }
     ) {
       edges {
         node {
           fields {
             slug
           }
-          excerpt
+          html
           frontmatter {
             title
             url

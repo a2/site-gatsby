@@ -2,7 +2,10 @@ import Typography from 'typography'
 import Wordpress2016 from 'typography-theme-wordpress-2016'
 
 import 'typeface-montserrat'
-import 'typeface-merriweather'
+import 'typeface-lato'
+
+Wordpress2016.bodyFontFamily = ['Lato', 'Helvetica', 'sans-serif']
+Wordpress2016.headerFontFamily = ['Lato', 'Helvetica', 'sans-serif']
 
 Wordpress2016.overrideThemeStyles = () => ({
   a: {
