@@ -13,7 +13,7 @@ export default class BlogIndex extends React.Component {
 
     return (
       <div>
-        <Helmet title={siteTitle} />
+        <Helmet title={`Blog | ${siteTitle}`} />
 
         <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {posts.map(({ node }) => (
