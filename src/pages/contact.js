@@ -69,6 +69,7 @@ export default class ContactPage extends React.Component {
           of those media is more appropriate.
         </p>
         <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
           <p>
             <Label>Name:</Label>
             <br />
