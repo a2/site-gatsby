@@ -1,7 +1,6 @@
 ---
 title: Hello, world!
 date: "2016-08-28"
-tags: ["hello", "potpourri"]
 ---
 
 In the programmer fashion of ["Hello, world!" programs](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program), I have thus titled my first post on this blog. (Although technically, this post is more of a "hello _again_." This is not my first post ever, but rather my first in a long, long time.)

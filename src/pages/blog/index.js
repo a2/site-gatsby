@@ -47,7 +47,6 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "MMMM D, YYYY")
             title
-            tags
           }
         }
       }

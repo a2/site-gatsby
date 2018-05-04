@@ -4,13 +4,11 @@ import Link from 'gatsby-link'
 import get from 'lodash/get'
 
 import { rhythm, scale } from '../../utils/typography'
-import tagify from '../../utils/tagify'
 
 export class PostExcerpt extends React.Component {
   render() {
     const { post } = this.props
     const title = get(post, 'frontmatter.title') || post.fields.slug
-    const tags = post.frontmatter.tags
 
     return (
       <div key={post.fields.slug}>
@@ -40,28 +38,6 @@ export class PostExcerpt extends React.Component {
           }}
           dangerouslySetInnerHTML={{ __html: post.excerpt }}
         />
-        {tags && (
-          <ul
-            style={{
-              ...scale(-1 / 5),
-              marginBottom: rhythm(0),
-              display: 'inline',
-            }}
-          >
-            Tags:{' '}
-            {tags.sort().map((tag, i) => (
-              <li
-                key={tag}
-                style={{
-                  display: 'inline',
-                  marginLeft: i > 0 ? rhythm(1 / 4) : 0,
-                }}
-              >
-                <Link to={`/blog/tags/${tagify(tag)}`}>{tag}</Link>
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
     )
   }
@@ -76,7 +52,6 @@ PostExcerpt.propTypes = {
     frontmatter: PropTypes.shape({
       title: PropTypes.string,
       date: PropTypes.string.isRequired,
-      tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
   }),
 }

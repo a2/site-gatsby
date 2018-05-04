@@ -1,7 +1,6 @@
 ---
 title: Splatoon 2
 date: "2018-03-24"
-tags: ["video games", "français"]
 ---
 
 _I've been learning French recently and, for one of my homework assignments, I wrote a bit about a video game I've been playing recently, Splatoon 2._

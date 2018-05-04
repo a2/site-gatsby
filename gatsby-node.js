@@ -3,14 +3,11 @@ const Promise = require('bluebird')
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
-const tagify = tag => (tag === 'iOS' ? 'ios' : _.kebabCase(tag))
-
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
   return new Promise((resolve, reject) => {
     const blogPost = path.resolve('./src/templates/blog-post.js')
-    const tagTemplate = path.resolve('./src/templates/tags.js')
 
     resolve(
       graphql(
@@ -27,7 +24,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                   frontmatter {
                     title
-                    tags
                   }
                 }
               }
@@ -70,21 +66,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             },
           })
         })
-
-        const tagLists = blogPosts
-          .filter(post => _.get(post, 'node.frontmatter.tags'))
-          .map(post => _.get(post, 'node.frontmatter.tags'))
-
-        _.uniq(_.flatten(tagLists)).forEach(tag => {
-          createPage({
-            path: `/blog/tags/${tagify(tag)}/`,
-            component: tagTemplate,
-            context: {
-              tag,
-            },
-          })
-        })
-
       })
     )
   })

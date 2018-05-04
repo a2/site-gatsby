@@ -5,14 +5,13 @@ import get from 'lodash/get'
 
 import { Bio } from '../components'
 import { rhythm, scale } from '../utils/typography'
-import tagify from '../utils/tagify'
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
     const { previous, next } = this.props.pathContext
-    const { title, date, tags } = post.frontmatter
+    const { title, date } = post.frontmatter
 
     return (
       <div>
@@ -28,28 +27,6 @@ class BlogPostTemplate extends React.Component {
         >
           {date}
         </p>
-        {tags && (
-          <ul
-            style={{
-              ...scale(-1 / 5),
-              display: 'block',
-              marginBottom: rhythm(0),
-              display: 'inline',
-            }}
-          >
-            {tags.sort().map((tag, i) => (
-              <li
-                key={tag}
-                style={{
-                  display: 'inline',
-                  marginLeft: i > 0 ? rhythm(1 / 4) : 0,
-                }}
-              >
-                <Link to={`/blog/tags/${tagify(tag)}`}>{tag}</Link>
-              </li>
-            ))}
-          </ul>
-        )}
         <div
           style={{ marginTop: rhythm(1) }}
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -106,7 +83,6 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")
-        tags
       }
     }
   }
