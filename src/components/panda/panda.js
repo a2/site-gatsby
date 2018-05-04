@@ -26,22 +26,31 @@ export class Panda extends React.Component {
     if (this.animationFrame || !this.state.puppet || prevState.puppet) {
       return
     }
+    
+    window.addEventListener('scroll', this.handleScroll)
+    if (window.DeviceOrientationEvent) {
+      window.addEventListener('deviceorientation', this.handleOrientation)
+    } else {
+      document.addEventListener('mouseout', this.handleMouseOut)
+      document.addEventListener('mousemove', this.handleMouseMove)
+      window.addEventListener('resize', this.handleResize)
 
-    this.handleResize()
+      this.handleResize()
+    }
+
     this.initCanvas()
     this.animate()
-
-    document.addEventListener('mouseout', this.handleMouseOut)
-    document.addEventListener('mousemove', this.handleMouseMove)
-    window.addEventListener('resize', this.handleResize)
-    window.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mouseout', this.handleMouseOut)
-    document.removeEventListener('mousemove', this.handleMouseMove)
-    window.removeEventListener('resize', this.handleResize)
     window.removeEventListener('scroll', this.handleScroll)
+    if (window.DeviceOrientationEvent) {
+      window.removeEventListener('deviceorientation', this.handleOrientation)
+    } else {
+      document.removeEventListener('mouseout', this.handleMouseOut)
+      document.removeEventListener('mousemove', this.handleMouseMove)
+      window.removeEventListener('resize', this.handleResize)
+    }
 
     cancelAnimationFrame(this.animationFrame)
     this.animationFrame = null
@@ -112,6 +121,33 @@ export class Panda extends React.Component {
   handleMouseMove = event => {
     this.inside = true
     this.mousePosition = new THREE.Vector2(event.clientX, event.clientY)
+  }
+
+  handleOrientation = event => {
+    let x, y
+    switch (window.orientation) {
+      case 0:
+        x = event.gamma
+        y = event.beta
+        break
+      case 90:
+        x = -event.beta
+        y = event.gamma
+        break
+      case -90:
+        x = event.beta
+        y = -event.gamma
+        break
+      case 180:
+        x = -event.gamma
+        y = -event.beta
+        break
+    }
+
+    this.inside = true
+    this.mousePosition = new THREE.Vector2(x, y)
+    this.mousePosition.clampLength(0, 50)
+    this.mousePosition.multiplyScalar(50)
   }
 
   newCameraPosition = () => {
