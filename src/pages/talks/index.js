@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
 import _ from 'lodash'
 
-import { Bio, PostExcerpt } from '../../components'
 import { rhythm, scale } from '../../utils/typography'
 
 export default class TalksPage extends React.Component {
