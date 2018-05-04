@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 
-import { Bio, PostExcerpt } from '../components'
+import { PostExcerpt } from '../components'
 
 export default class FourOhFour extends React.Component {
   render() {
