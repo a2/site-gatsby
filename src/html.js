@@ -1,4 +1,5 @@
-import React from "react"
+import React from 'react'
+import { options, rhythm } from './utils/typography'
 
 let stylesStr
 if (process.env.NODE_ENV === `production`) {
@@ -8,6 +9,9 @@ if (process.env.NODE_ENV === `production`) {
     console.log(e)
   }
 }
+
+const rhythmUnitless = value =>
+  parseFloat(rhythm(value)) * parseInt(options.baseFontSize, 10)
 
 module.exports = class HTML extends React.Component {
   render() {
@@ -20,6 +24,9 @@ module.exports = class HTML extends React.Component {
         />
       )
     }
+
+    const minWidth = rhythmUnitless(18)
+
     return (
       <html {...this.props.htmlAttributes}>
         <head>
@@ -27,7 +34,7 @@ module.exports = class HTML extends React.Component {
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            content={`width=${minWidth}, initial-scale=1, shrink-to-fit=yes`}
           />
           {this.props.headComponents}
           {css}
