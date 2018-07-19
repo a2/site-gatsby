@@ -25,10 +25,10 @@ export class Bio extends React.Component {
         />
         <p>
           I work in Berlin on{' '}
-          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> and
-          occasionally <Link to="/talks"> give talks</Link> at meet-ups and
-          conferences. I'm very enthusiastic about pandas. You can follow me on{' '}
-          <a href="https://twitter.com/a2">Twitter</a>.
+          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for Apple
+          platforms and occasionally <Link to="/talks">speak</Link> at meet-ups
+          and conferences. I'm very enthusiastic about pandas. You can follow me
+          on <a href="https://twitter.com/a2">Twitter</a>.
         </p>
       </div>
     )

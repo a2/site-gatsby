@@ -16,9 +16,11 @@ export default class SiteIndex extends React.Component {
 
         <h3>👋🏻&nbsp;&nbsp;Why, hello there!</h3>
         <p>
-          I work in Berlin on Microsoft To-Do and occasionally give talks at
-          meet-ups and conferences. I'm very enthusiastic about pandas. You can
-          follow me <a href="https://twitter.com/a2">on Twitter</a>.
+          I work in Berlin on{' '}
+          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for Apple
+          platforms and occasionally <Link to="/talks">speak</Link> at meet-ups
+          and conferences. I'm very enthusiastic about pandas. You can follow me
+          on <a href="https://twitter.com/a2">Twitter</a>.
         </p>
 
         <h3>✏️&nbsp;&nbsp;Blog</h3>
