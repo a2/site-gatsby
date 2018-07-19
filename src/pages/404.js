@@ -41,7 +41,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      limit: 3,
+      limit: 3
       filter: { fields: { slug: { regex: "^/blog/" } } }
     ) {
       edges {

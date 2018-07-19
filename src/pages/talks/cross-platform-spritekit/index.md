@@ -8,4 +8,3 @@ image: 'slide.png'
 ---
 
 SpriteKit is Apple's framework for 2D sprite rendering. I gave an overview of the various features of the framework and how developers can leverage them across Apple's platforms.
-

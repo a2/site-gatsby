@@ -23,11 +23,11 @@ When I started this project years ago, I concentrated my efforts to write a web 
 
 A pass is a ZIP archive containing the following files:
 
-* **_pass.json_** The pass payload in JSON format. More information about its structure can be found in the [PassKit Package Format Reference](https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/Introduction.html).
-* **_manifest.json_** A JSON object keyed by file path (relative to bundle root) and whose values are SHA-1 digest hashes of those files. All files must be listed, except _manifest.json_ and _signature_.
-* **_signature_** A detached PKCS#7 signature of manifest.json, signed with your Pass Type ID certificate.
-* **Optional images** such as _background.png_, _footer.png_, _icon.png_, _logo.png_, _strip.png_, _thumbnail.png_. The images supported by a pass is dependent on the pass’s type.
-* **Localized resources** organized into _\*.lproj_ directories, not unlike in Apple platform apps.
+- **_pass.json_** The pass payload in JSON format. More information about its structure can be found in the [PassKit Package Format Reference](https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/Introduction.html).
+- **_manifest.json_** A JSON object keyed by file path (relative to bundle root) and whose values are SHA-1 digest hashes of those files. All files must be listed, except _manifest.json_ and _signature_.
+- **_signature_** A detached PKCS#7 signature of manifest.json, signed with your Pass Type ID certificate.
+- **Optional images** such as _background.png_, _footer.png_, _icon.png_, _logo.png_, _strip.png_, _thumbnail.png_. The images supported by a pass is dependent on the pass’s type.
+- **Localized resources** organized into _\*.lproj_ directories, not unlike in Apple platform apps.
 
 The _manifest.json_ file contains cryptographic digest "fingerprints" of every file in the pass, and the _signature_ file is a cryptographic signature that verifies the pass’s authenticity. The _signature_ is "detached" in that it itself does not contain the signed data. The abbreviation _PKCS_ stands for _Public Key Cryptography Standards_ (hopefully self-explanatory) developed by RSA Security Inc. The signing algorithm uses the seventh such standard and is formally defined by [RFC 2315](https://tools.ietf.org/html/rfc2315) (_Cryptographic Message Syntax_).
 

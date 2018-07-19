@@ -30,7 +30,7 @@ class Template extends React.Component {
         isActive = location === '/'
       } else {
         isActive = location.startsWith(props.to)
-      }      
+      }
 
       return (
         <Link

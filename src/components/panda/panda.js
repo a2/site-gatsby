@@ -26,7 +26,7 @@ export class Panda extends React.Component {
     if (this.animationFrame || !this.state.puppet || prevState.puppet) {
       return
     }
-    
+
     window.addEventListener('scroll', this.handleScroll)
     if (window.DeviceOrientationEvent) {
       window.addEventListener('deviceorientation', this.handleOrientation)
