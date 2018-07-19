@@ -8,12 +8,11 @@ import { rhythm, scale } from '../../utils/typography'
 
 export default class BlogIndex extends React.Component {
   render() {
-    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
     const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
-        <Helmet title={`Blog | ${siteTitle}`} />
+        <Helmet title="Blog" />
 
         <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {posts.map(({ node }) => (
@@ -29,11 +28,6 @@ export default class BlogIndex extends React.Component {
 
 export const pageQuery = graphql`
   query BlogIndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { slug: { regex: "^/blog/" } } }

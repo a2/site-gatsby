@@ -56,12 +56,10 @@ const Button = props => {
 
 export default class ContactPage extends React.Component {
   render() {
-    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
-    const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
-
     return (
       <div>
-        <Helmet title={`Contact | ${siteTitle}`} />
+        <Helmet title="Contact" />
+
         <p>
           You can also find me on <a href="https://twitter.com/a2">Twitter</a>,{' '}
           <a href="https://github.com/a2">GitHub</a>, and{' '}
@@ -93,13 +91,3 @@ export default class ContactPage extends React.Component {
     )
   }
 }
-
-export const pageQuery = graphql`
-  query ContactQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

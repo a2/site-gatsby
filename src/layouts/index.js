@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { Container } from 'react-responsive-grid'
 
@@ -74,6 +75,7 @@ class Template extends React.Component {
 
   render() {
     const isRoot = this.props.location.pathname === this.rootPath()
+    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
 
     return (
       <Container
@@ -82,6 +84,8 @@ class Template extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
+        <Helmet defaultTitle={siteTitle} titleTemplate={`%s | ${siteTitle}`} />
+
         <header style={{ margin: `0 auto ${rhythm(1.5)}` }}>
           <CenteredPanda animate={isRoot} size={150} />
           <h1
@@ -91,10 +95,12 @@ class Template extends React.Component {
               marginBottom: rhythm(0.5),
             }}
           >
-            Alexsander Akers
+            {siteTitle}
           </h1>
+
           {this.renderNavigation()}
         </header>
+
         {this.props.children()}
       </Container>
     )
@@ -102,3 +108,13 @@ class Template extends React.Component {
 }
 
 export default Template
+
+export const pageQuery = graphql`
+  query LayoutIndexQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`

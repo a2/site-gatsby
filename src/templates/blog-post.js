@@ -15,7 +15,8 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <div>
-        <Helmet title={`${title} | ${siteTitle}`} />
+        <Helmet title={title} />
+
         <h1>{title}</h1>
         <p
           style={{

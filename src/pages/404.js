@@ -7,12 +7,12 @@ import { PostExcerpt } from '../components'
 
 export default class FourOhFour extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
-        <Helmet title={`Page Not Found | ${siteTitle}`} />
+        <Helmet title="Page Not Found" />
+
         <h1>Page Not Found</h1>
         <p>
           We sent our panda search team to look for the page you requested,
@@ -34,11 +34,6 @@ export default class FourOhFour extends React.Component {
 
 export const pageQuery = graphql`
   query FourOhFourQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 3

@@ -7,13 +7,10 @@ import { rhythm, scale } from '../utils/typography'
 
 export default class SiteIndex extends React.Component {
   render() {
-    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
     const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
-        <Helmet title={siteTitle} />
-
         <h3>👋🏻&nbsp;&nbsp;Why, hello there!</h3>
         <p>
           I work in Berlin on{' '}
@@ -61,11 +58,6 @@ export default class SiteIndex extends React.Component {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { slug: { regex: "^/blog/" } } }
