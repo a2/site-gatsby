@@ -13,7 +13,7 @@ export default class TalksPage extends React.Component {
 
     return (
       <div>
-        <Helmet title="Talks" />
+        <Helmet title="Speaking" />
 
         <ul style={{ listStyle: 'none', marginLeft: 0 }}>
           {talks.map(({ node }) => (

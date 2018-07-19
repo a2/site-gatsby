@@ -66,8 +66,8 @@ class Template extends React.Component {
         <ul style={{ listStyle: 'none' }}>
           <NavItem to="/">Home</NavItem>
           <NavItem to="/blog">Blog</NavItem>
+          <NavItem to="/talks">Speaking</NavItem>
           <NavItem to="/contact">Contact</NavItem>
-          <NavItem to="/talks">Talks</NavItem>
         </ul>
       </nav>
     )
