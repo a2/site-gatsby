@@ -1,10 +1,8 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import _ from 'lodash'
 
 import { PostExcerpt } from '../../components'
-import { rhythm, scale } from '../../utils/typography'
 
 export default class BlogIndex extends React.Component {
   render() {

@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
 import _ from 'lodash'
@@ -8,7 +7,6 @@ import { rhythm, scale } from '../../utils/typography'
 
 export default class TalksPage extends React.Component {
   render() {
-    const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
     const talks = _.get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
@@ -71,11 +69,6 @@ export default class TalksPage extends React.Component {
 
 export const pageQuery = graphql`
   query TalksQuery {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 1000
