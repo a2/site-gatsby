@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import { Container } from 'react-responsive-grid'
+import _ from 'lodash'
 
 import { Panda } from '../components'
 import { rhythm, scale } from '../utils/typography'
