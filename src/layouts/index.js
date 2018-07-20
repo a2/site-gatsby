@@ -15,6 +15,41 @@ const CenteredPanda = props => (
   </div>
 )
 
+const NavLink = props => {
+  let active
+  if (props.to === '/') {
+    active = props.from === '/'
+  } else {
+    active = props.from.startsWith(props.to)
+  }
+
+  return (
+    <Link
+      to={props.to}
+      style={{
+        ...(active ? { color: '#00A88F' } : { color: 'black' }),
+        ...scale(2 / 5),
+        boxShadow: 'none',
+        fontFamily: 'Montserrat',
+        fontWeight: 700,
+      }}
+    >
+      {props.children}
+    </Link>
+  )
+}
+
+const NavItem = props => {
+  const extraPadding = props.to === '/' ? 0 : rhythm(1)
+  return (
+    <li key={props.to} style={{ display: 'inline', paddingLeft: extraPadding }}>
+      <NavLink from={props.from} to={props.to}>
+        {props.children}
+      </NavLink>
+    </li>
+  )
+}
+
 class Template extends React.Component {
   rootPath() {
     let rootPath = '/'
@@ -25,57 +60,28 @@ class Template extends React.Component {
   }
 
   renderNavigation() {
-    const NavLink = props => {
-      const location = this.props.location.pathname
-      let isActive
-      if (props.to === '/') {
-        isActive = location === '/'
-      } else {
-        isActive = location.startsWith(props.to)
-      }
-
-      return (
-        <Link
-          to={props.to}
-          style={{
-            ...(isActive ? { color: '#00A88F' } : { color: 'black' }),
-            ...scale(2 / 5),
-            boxShadow: 'none',
-            fontFamily: 'Montserrat',
-            fontWeight: 700,
-          }}
-        >
-          {props.children}
-        </Link>
-      )
-    }
-
-    const NavItem = props => {
-      const extraPadding = props.to === '/' ? 0 : rhythm(1)
-      return (
-        <li
-          key={props.to}
-          style={{ display: 'inline', paddingLeft: extraPadding }}
-        >
-          <NavLink to={props.to}>{props.children}</NavLink>
-        </li>
-      )
-    }
-
+    const from = this.props.location.pathname
     return (
       <nav style={{ textAlign: 'center' }}>
         <ul style={{ listStyle: 'none' }}>
-          <NavItem to="/">Home</NavItem>
-          <NavItem to="/blog">Blog</NavItem>
-          <NavItem to="/talks">Speaking</NavItem>
-          <NavItem to="/contact">Contact</NavItem>
+          <NavItem from={from} to="/">
+            Home
+          </NavItem>
+          <NavItem from={from} to="/blog">
+            Blog
+          </NavItem>
+          <NavItem from={from} to="/talks">
+            Speaking
+          </NavItem>
+          <NavItem from={from} to="/contact">
+            Contact
+          </NavItem>
         </ul>
       </nav>
     )
   }
 
   render() {
-    const isRoot = this.props.location.pathname === this.rootPath()
     const siteTitle = _.get(this, 'props.data.site.siteMetadata.title')
 
     return (
@@ -88,7 +94,7 @@ class Template extends React.Component {
         <Helmet defaultTitle={siteTitle} titleTemplate={`%s | ${siteTitle}`} />
 
         <header style={{ margin: `0 auto ${rhythm(1.5)}` }}>
-          <CenteredPanda animate={isRoot} size={150} />
+          <CenteredPanda size={150} />
           <h1
             style={{
               textAlign: 'center',
