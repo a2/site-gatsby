@@ -27,30 +27,23 @@ export class Panda extends React.Component {
       return
     }
 
+    document.addEventListener('mouseout', this.handleMouseOut)
+    document.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('scroll', this.handleScroll)
-    if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', this.handleOrientation)
-    } else {
-      document.addEventListener('mouseout', this.handleMouseOut)
-      document.addEventListener('mousemove', this.handleMouseMove)
-      window.addEventListener('resize', this.handleResize)
-
-      this.handleResize()
-    }
+    window.addEventListener('deviceorientation', this.handleOrientation)
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
 
     this.initCanvas()
     this.animate()
   }
 
   componentWillUnmount() {
+    document.removeEventListener('mouseout', this.handleMouseOut)
+    document.removeEventListener('mousemove', this.handleMouseMove)
     window.removeEventListener('scroll', this.handleScroll)
-    if (window.DeviceOrientationEvent) {
-      window.removeEventListener('deviceorientation', this.handleOrientation)
-    } else {
-      document.removeEventListener('mouseout', this.handleMouseOut)
-      document.removeEventListener('mousemove', this.handleMouseMove)
-      window.removeEventListener('resize', this.handleResize)
-    }
+    window.removeEventListener('deviceorientation', this.handleOrientation)
+    window.removeEventListener('resize', this.handleResize)
 
     cancelAnimationFrame(this.animationFrame)
     this.animationFrame = null
@@ -114,11 +107,13 @@ export class Panda extends React.Component {
   }
 
   handleMouseOut = event => {
+    if (this.hasDeviceOrientation) return
     this.inside = false
     this.mousePosition = new THREE.Vector2()
   }
 
   handleMouseMove = event => {
+    if (this.hasDeviceOrientation) return
     this.inside = true
     this.mousePosition = new THREE.Vector2(event.clientX, event.clientY)
   }
@@ -145,6 +140,7 @@ export class Panda extends React.Component {
     }
 
     this.inside = true
+    this.hasDeviceOrientation = true
     this.mousePosition = new THREE.Vector2(x, y)
     this.mousePosition.clampLength(0, 50)
     this.mousePosition.multiplyScalar(50)
