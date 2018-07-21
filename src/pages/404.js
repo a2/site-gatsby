@@ -13,7 +13,7 @@ export default class FourOhFour extends React.Component {
       <div>
         <Helmet title="Page Not Found" />
 
-        <h1>Page Not Found</h1>
+        <h2>Page Not Found</h2>
         <p>
           We sent our panda search team to look for the page you requested,
           <br />

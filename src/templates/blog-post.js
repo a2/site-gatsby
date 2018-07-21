@@ -17,7 +17,7 @@ class BlogPostTemplate extends React.Component {
       <div>
         <Helmet title={title} />
 
-        <h1>{title}</h1>
+        <h2>{title}</h2>
         <p
           style={{
             ...scale(-1 / 5),
