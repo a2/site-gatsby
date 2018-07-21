@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import Helmet from 'react-helmet'
 import _ from 'lodash'
 
 import { rhythm, scale } from '../utils/typography'
+import { Bio } from '../components';
 
 export default class SiteIndex extends React.Component {
   render() {
@@ -12,13 +12,7 @@ export default class SiteIndex extends React.Component {
     return (
       <div>
         <h3>👋🏻&nbsp;&nbsp;Why, hello there!</h3>
-        <p>
-          I work in Berlin on{' '}
-          <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for Apple
-          platforms and occasionally <Link to="/talks">speak</Link> at meet-ups
-          and conferences. I'm very enthusiastic about pandas. You can follow me
-          on <a href="https://twitter.com/a2">Twitter</a>.
-        </p>
+        <Bio inline={true} image={false} />
 
         <h3>✏️&nbsp;&nbsp;Blog</h3>
         <p>

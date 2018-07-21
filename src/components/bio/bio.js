@@ -9,20 +9,24 @@ export class Bio extends React.Component {
     return (
       <div
         style={{
-          display: 'flex',
-          marginBottom: rhythm(2.5),
+          ...(!this.props.inline && {
+            display: 'flex',
+            marginBottom: rhythm(2.5),
+          }),
         }}
       >
-        <img
-          src={profilePic}
-          alt="Alexsander Akers"
-          style={{
-            marginRight: rhythm(1 / 2),
-            marginBottom: 0,
-            width: rhythm(2),
-            height: rhythm(2),
-          }}
-        />
+        {this.props.image != false && (
+          <img
+            src={profilePic}
+            alt="Alexsander Akers"
+            style={{
+              marginRight: rhythm(1 / 2),
+              marginBottom: 0,
+              width: rhythm(2),
+              height: rhythm(2),
+            }}
+          />
+        )}
         <p>
           I work in Berlin on{' '}
           <a href="https://to-do.microsoft.com">Microsoft To-Do</a> for Apple
