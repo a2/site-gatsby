@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import _ from 'lodash'
 
 import { rhythm, scale } from '../utils/typography'
-import { Bio } from '../components';
+import { Bio } from '../components'
 
 export default class SiteIndex extends React.Component {
   render() {
@@ -11,15 +11,14 @@ export default class SiteIndex extends React.Component {
 
     return (
       <div>
-        <h3><span aria-hidden>👋🏻</span>&nbsp;&nbsp;Why, hello there!</h3>
+        <h3>
+          <span aria-hidden>👋🏻</span>&nbsp;&nbsp;Why, hello there!
+        </h3>
         <Bio inline={true} image={false} />
 
-        <h3><span aria-hidden>✏️</span>&nbsp;&nbsp;Blog</h3>
-        <p>
-          I write stuff and this is filler text to make the line go longer and
-          maybe you would read about these blog posts that I’ve written below.
-        </p>
-
+        <h3>
+          <span aria-hidden>✏️</span>&nbsp;&nbsp;Blog
+        </h3>
         <ul style={{ listStyle: 'none', marginLeft: '1rem' }}>
           {posts.map(({ node }) => (
             <li key={node.fields.slug}>
