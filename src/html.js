@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === `production`) {
 const rhythmUnitless = value =>
   parseFloat(rhythm(value)) * parseInt(options.baseFontSize, 10)
 
-module.exports = class HTML extends React.Component {
+export default class HTML extends React.Component {
   render() {
     let css
     if (process.env.NODE_ENV === `production`) {
@@ -28,7 +28,7 @@ module.exports = class HTML extends React.Component {
     const minWidth = rhythmUnitless(18)
 
     return (
-      <html {...this.props.htmlAttributes}>
+      <html lang="en" {...this.props.htmlAttributes}>
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
