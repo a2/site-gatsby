@@ -32,10 +32,7 @@ module.exports = class HTML extends React.Component {
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta
-            name="viewport"
-            content={`width=${minWidth}, initial-scale=1, shrink-to-fit=yes`}
-          />
+          <meta name="viewport" content={`width=${minWidth}`} />
           {this.props.headComponents}
           {css}
         </head>
