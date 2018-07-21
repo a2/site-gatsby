@@ -7,4 +7,4 @@ date: '2015-03-22'
 image: 'slide.png'
 ---
 
-Using slides only featuring emoji, I discussed how my inability to make decisions in a side project of mine led to its downfall.
+Using slides featuring only emoji, I discussed how my inability to make decisions in a side project of mine led to its downfall.
