@@ -30,7 +30,7 @@ const NavLink = props => {
         ...(active ? { color: '#00A88F' } : { color: 'black' }),
         ...scale(2 / 5),
         boxShadow: 'none',
-        fontFamily: 'Montserrat',
+        fontFamily: 'Montserrat, sans-serif',
         fontWeight: 700,
       }}
     >
