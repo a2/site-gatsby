@@ -1,4 +1,5 @@
 import React from 'react'
+import bowser from 'bowser/compiled'
 import * as THREE from 'three'
 
 import model from './model'
@@ -17,9 +18,11 @@ export class Panda extends React.Component {
   }
 
   componentDidMount() {
-    new THREE.ObjectLoader().parse(model, puppet => {
-      this.setState({ puppet })
-    })
+    if (bowser.getParser(window.navigator.userAgent).isPlatform('desktop')) {
+      new THREE.ObjectLoader().parse(model, puppet => {
+        this.setState({ puppet })
+      })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,7 +33,6 @@ export class Panda extends React.Component {
     document.addEventListener('mouseout', this.handleMouseOut)
     document.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('scroll', this.handleScroll)
-    window.addEventListener('deviceorientation', this.handleOrientation)
     window.addEventListener('resize', this.handleResize)
     this.handleResize()
 
@@ -42,7 +44,6 @@ export class Panda extends React.Component {
     document.removeEventListener('mouseout', this.handleMouseOut)
     document.removeEventListener('mousemove', this.handleMouseMove)
     window.removeEventListener('scroll', this.handleScroll)
-    window.removeEventListener('deviceorientation', this.handleOrientation)
     window.removeEventListener('resize', this.handleResize)
 
     cancelAnimationFrame(this.animationFrame)
@@ -107,43 +108,13 @@ export class Panda extends React.Component {
   }
 
   handleMouseOut = event => {
-    if (this.hasDeviceOrientation) return
     this.inside = false
     this.mousePosition = new THREE.Vector2()
   }
 
   handleMouseMove = event => {
-    if (this.hasDeviceOrientation) return
     this.inside = true
     this.mousePosition = new THREE.Vector2(event.clientX, event.clientY)
-  }
-
-  handleOrientation = event => {
-    let x, y
-    switch (window.orientation) {
-      case 0:
-        x = event.gamma
-        y = event.beta
-        break
-      case 90:
-        x = -event.beta
-        y = event.gamma
-        break
-      case -90:
-        x = event.beta
-        y = -event.gamma
-        break
-      case 180:
-        x = -event.gamma
-        y = -event.beta
-        break
-    }
-
-    this.inside = true
-    this.hasDeviceOrientation = true
-    this.mousePosition = new THREE.Vector2(x, y)
-    this.mousePosition.clampLength(0, 50)
-    this.mousePosition.multiplyScalar(50)
   }
 
   newCameraPosition = () => {

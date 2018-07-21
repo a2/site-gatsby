@@ -7,6 +7,7 @@
     "url": "https://github.com/a2/gatsby-website/issues"
   },
   "dependencies": {
+    "bowser": "^2.0.0-alpha.2",
     "gatsby": "^1.9.274",
     "gatsby-image": "^1.0.55",
     "gatsby-link": "^1.6.46",
