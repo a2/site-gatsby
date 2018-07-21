@@ -80,9 +80,6 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
-          fields {
-            slug
-          }
           html
           frontmatter {
             title
