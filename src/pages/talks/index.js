@@ -19,39 +19,43 @@ export default class TalksPage extends React.Component {
               key={node.frontmatter.title}
               style={{ marginBottom: rhythm(2) }}
             >
-              <Img
-                resolutions={node.frontmatter.image.childImageSharp.resolutions}
-                style={{
-                  border: '1px solid rgba(0, 0, 0, 0.1)',
-                  borderRadius: 10,
-                }}
-              />
-              <h3
-                style={{
-                  marginTop: rhythm(1 / 4),
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <a style={{ boxShadow: 'none' }} href={node.frontmatter.url}>
-                  {node.frontmatter.title}
-                </a>
-              </h3>
-              <p
-                style={{
-                  ...scale(-1 / 5),
-                  display: 'block',
-                  marginBottom: rhythm(0),
-                }}
-              >
-                <a
-                  style={{ boxShadow: 'none' }}
-                  href={node.frontmatter.venueUrl}
+              <div style={{ textAlign: 'center' }}>
+                <Img
+                  resolutions={
+                    node.frontmatter.image.childImageSharp.resolutions
+                  }
+                  style={{
+                    border: '1px solid rgba(0, 0, 0, 0.1)',
+                    borderRadius: 10,
+                  }}
+                />
+                <h3
+                  style={{
+                    marginTop: rhythm(1 / 4),
+                    marginBottom: rhythm(1 / 4),
+                  }}
                 >
-                  <strong>{node.frontmatter.venue}</strong>
-                </a>
-                {' – '}
-                {node.frontmatter.date}
-              </p>
+                  <a style={{ boxShadow: 'none' }} href={node.frontmatter.url}>
+                    {node.frontmatter.title}
+                  </a>
+                </h3>
+                <p
+                  style={{
+                    ...scale(-1 / 5),
+                    display: 'block',
+                    marginBottom: rhythm(0),
+                  }}
+                >
+                  <a
+                    style={{ boxShadow: 'none' }}
+                    href={node.frontmatter.venueUrl}
+                  >
+                    <strong>{node.frontmatter.venue}</strong>
+                  </a>
+                  {' – '}
+                  {node.frontmatter.date}
+                </p>
+              </div>
               <p
                 style={{
                   marginTop: rhythm(1 / 2),
