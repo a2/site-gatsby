@@ -91,7 +91,13 @@ class Template extends React.Component {
           padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
         }}
       >
-        <Helmet defaultTitle={siteTitle} titleTemplate={`%s | ${siteTitle}`} />
+        <Helmet defaultTitle={siteTitle} titleTemplate={`%s | ${siteTitle}`}>
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.pride.codes/css/bar_body.css"
+          />
+        </Helmet>
 
         <header style={{ margin: `0 auto ${rhythm(1.5)}` }}>
           <CenteredPanda size={150} />
