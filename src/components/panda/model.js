@@ -7,11 +7,11 @@ import headAmbient from './head-ambient.jpg'
 import headSpecroughlw from './head-specroughlw.jpg'
 
 model.images = [
-  { uuid: '40461AE2-D3E4-43E2-893D-B5C95AD6594B', url: eyeFront },
-  { uuid: '62893D1C-8A08-4505-99B4-0FFC95205690', url: eyeBack },
-  { uuid: 'A60C7E3E-EFDC-4F4D-8AFF-1843AB5C4AAD', url: headDiffuse },
-  { uuid: '71AD5F10-EEAB-4DE8-B1C3-8BC3690752B1', url: headAmbient },
-  { uuid: '41E75687-E986-4BD7-8A7D-D52B5C4D6708', url: headSpecroughlw },
+  { uuid: 'A66B957A-38FB-43DA-A262-7CD170C58EB3', url: eyeFront },
+  { uuid: 'AF445E35-856F-4D44-A729-0AA542C92D40', url: eyeBack },
+  { uuid: 'F634E69E-DBF0-49B3-9593-C3E6FC7ACC2B', url: headDiffuse },
+  { uuid: '6C4B567B-B473-4D99-B928-7F8961E4E320', url: headAmbient },
+  { uuid: '345832B3-D8ED-4C7F-AEBB-E55B6F70B013', url: headSpecroughlw },
 ]
 
 export default model
