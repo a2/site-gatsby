@@ -55,10 +55,10 @@ export class Panda extends React.Component {
 
     const center = new THREE.Vector3()
     new THREE.Box3().setFromObject(puppet).getCenter(center)
+    puppet.position.y = -center.y
 
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xffffff)
-    scene.position.y = center.y
     scene.add(puppet)
 
     const camera = new THREE.PerspectiveCamera()
@@ -92,12 +92,11 @@ export class Panda extends React.Component {
 
   renderScene = () => {
     const delta = this.clock.getDelta()
-    const sceneY = this.scene.position.y
     const { x: newX, y: newY } = this.newCameraPosition()
     const { x: oldX, y: oldY } = this.camera.position
 
     this.camera.position.x += (-newX - oldX) * 15 * delta
-    this.camera.position.y += (newY + sceneY - oldY) * 15 * delta
+    this.camera.position.y += (newY - oldY) * 15 * delta
 
     this.camera.lookAt(this.scene.position)
     this.renderer.render(this.scene, this.camera)
