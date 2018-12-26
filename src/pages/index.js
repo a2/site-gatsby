@@ -1,13 +1,13 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import _ from 'lodash'
+import get from 'lodash/get'
+import { Link,  graphql } from 'gatsby'
 
 import { rhythm, scale } from '../utils/typography'
 import { Bio } from '../components'
 
 export default class SiteIndex extends React.Component {
   render() {
-    const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
+    const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
@@ -50,7 +50,7 @@ export default class SiteIndex extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query IndexQuery {
+  query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { slug: { regex: "^/blog/" } } }

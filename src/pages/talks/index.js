@@ -1,13 +1,14 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Img from 'gatsby-image'
-import _ from 'lodash'
+import get from 'lodash/get'
+import { graphql } from 'gatsby'
 
 import { rhythm, scale } from '../../utils/typography'
 
 export default class TalksPage extends React.Component {
   render() {
-    const talks = _.get(this, 'props.data.allMarkdownRemark.edges')
+    const talks = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
@@ -20,7 +21,7 @@ export default class TalksPage extends React.Component {
               style={{ marginBottom: rhythm(2) }}
             >
               <Img
-                resolutions={node.frontmatter.image.childImageSharp.resolutions}
+                resolutions={node.frontmatter.image.childImageSharp.fixed}
                 style={{
                   border: '1px solid rgba(0, 0, 0, 0.1)',
                   borderRadius: 10,
@@ -68,7 +69,7 @@ export default class TalksPage extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query TalksQuery {
+  query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 1000
@@ -85,8 +86,8 @@ export const pageQuery = graphql`
             date(formatString: "MMMM D, YYYY")
             image {
               childImageSharp {
-                resolutions(height: 200) {
-                  ...GatsbyImageSharpResolutions
+                fixed(height: 200) {
+                  ...GatsbyImageSharpFixed
                 }
               }
             }

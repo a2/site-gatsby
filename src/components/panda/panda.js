@@ -1,5 +1,5 @@
 import React from 'react'
-import bowser from 'bowser/compiled'
+import bowser from 'bowser'
 import * as THREE from 'three'
 
 import model from './model'
