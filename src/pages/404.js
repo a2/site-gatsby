@@ -1,7 +1,7 @@
 import React from 'react'
-import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
+import { graphql } from 'gatsby'
 
 import { PostExcerpt } from '../components'
 
@@ -33,7 +33,7 @@ export default class FourOhFour extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query FourOhFourQuery {
+  query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 3

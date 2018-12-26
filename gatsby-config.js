@@ -5,8 +5,13 @@ module.exports = {
     description: 'The personal website and blog of Alexsander Akers.',
     siteUrl: 'https://a2.io/',
   },
-  pathPrefix: '/gatsby-starter-blog',
   plugins: [
+    {
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: `${__dirname}/src/components/layout/layout.js`,
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

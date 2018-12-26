@@ -1,12 +1,13 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import _ from 'lodash'
+import get from 'lodash/get'
+import { graphql } from 'gatsby'
 
 import { PostExcerpt } from '../../components'
 
 export default class BlogIndex extends React.Component {
   render() {
-    const posts = _.get(this, 'props.data.allMarkdownRemark.edges')
+    const posts = get(this, 'props.data.allMarkdownRemark.edges')
 
     return (
       <div>
@@ -25,7 +26,7 @@ export default class BlogIndex extends React.Component {
 }
 
 export const pageQuery = graphql`
-  query BlogIndexQuery {
+  query {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { fields: { slug: { regex: "^/blog/" } } }

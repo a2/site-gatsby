@@ -6,7 +6,6 @@ import 'typeface-lato'
 
 Wordpress2016.bodyFontFamily = ['Lato', 'Helvetica', 'sans-serif']
 Wordpress2016.headerFontFamily = ['Lato', 'Helvetica', 'sans-serif']
-
 Wordpress2016.overrideThemeStyles = () => ({
   a: {
     color: '#00a88f',
@@ -19,10 +18,5 @@ Wordpress2016.overrideThemeStyles = () => ({
 delete Wordpress2016.googleFonts
 
 const typography = new Typography(Wordpress2016)
-
-// Hot reload typography in development.
-if (process.env.NODE_ENV !== 'production') {
-  typography.injectStyles()
-}
-
-export default typography
+const { options, rhythm, scale } = typography
+export { options, rhythm, scale, typography as default }
