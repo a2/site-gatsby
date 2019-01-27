@@ -1,8 +1,21 @@
-# gatsby-starter-blog
-Gatsby starter for creating a blog
+# a2.io
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
-`gatsby new gatsby-blog https://github.com/gatsbyjs/gatsby-starter-blog`
+The personal website of Alexsander Akers, built on top of Gatsby.
 
-## Running in development
-`gatsby develop`
+## Running in Development
+
+Install required components with Yarn:
+
+```sh
+yarn install
+```
+
+Then you can build and run the website, again with Yarn:
+
+```sh
+yarn dev
+```
+
+## License 
+
+MIT License
