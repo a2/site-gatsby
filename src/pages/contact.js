@@ -81,6 +81,7 @@ export default class ContactPage extends React.Component {
             <br />
             <TextArea name="message" rows="5" />
           </p>
+          <div data-netlify-recaptcha="true" />
           <p>
             <Button type="submit">Send</Button>
           </p>
