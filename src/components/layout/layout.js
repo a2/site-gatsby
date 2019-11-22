@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import { Location } from '@reach/router';
 
 import { Panda } from '../../components'
 import { rhythm, scale } from '../../utils/typography'
@@ -15,6 +16,7 @@ const CenteredPanda = props => (
 )
 
 const NavLink = props => {
+  console.log(props)
   let active
   if (props.to === '/') {
     active = props.from === '/'
@@ -64,15 +66,8 @@ const Container = props => (
 )
 
 export class Layout extends React.Component {
-  rootPath() {
-    let rootPath = '/'
-    if (typeof __PREFIX_PATHS__ !== 'undefined' && __PREFIX_PATHS__) {
-      rootPath = __PATH_PREFIX__ + '/'
-    }
-    return rootPath
-  }
-
   renderNavigation() {
+    console.log(this.props)
     const from = this.props.location.pathname
     return (
       <nav style={{ textAlign: 'center' }}>
