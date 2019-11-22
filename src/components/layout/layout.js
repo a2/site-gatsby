@@ -16,6 +16,7 @@ const CenteredPanda = props => (
 )
 
 const NavLink = props => {
+  console.log(props)
   let active
   if (props.to === '/') {
     active = props.from === '/'
@@ -66,6 +67,7 @@ const Container = props => (
 
 export class Layout extends React.Component {
   renderNavigation() {
+    console.log(props)
     const from = this.props.location.pathname
     return (
       <nav style={{ textAlign: 'center' }}>
