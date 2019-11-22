@@ -67,7 +67,7 @@ const Container = props => (
 
 export class Layout extends React.Component {
   renderNavigation() {
-    console.log(props)
+    console.log(this.props)
     const from = this.props.location.pathname
     return (
       <nav style={{ textAlign: 'center' }}>
