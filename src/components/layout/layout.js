@@ -20,6 +20,7 @@ const NavLink = props => {
     active = props.from === '/'
   } else {
     active = props.from.startsWith(props.to)
+    console.log(props.from, props.to, active)
   }
 
   return (
