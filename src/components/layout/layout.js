@@ -65,14 +65,6 @@ const Container = props => (
 )
 
 export class Layout extends React.Component {
-  rootPath() {
-    let rootPath = '/'
-    if (typeof __PREFIX_PATHS__ !== 'undefined' && __PREFIX_PATHS__) {
-      rootPath = __PATH_PREFIX__ + '/'
-    }
-    return rootPath
-  }
-
   renderNavigation() {
     const from = this.props.location.pathname
     return (
