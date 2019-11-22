@@ -24,23 +24,18 @@ const NavLink = props => {
   }
 
   return (
-    <Location>
-      {({ location }) => {
-        console.log(props, location)
-        return (<Link
-          to={props.to}
-          style={{
-            ...(active ? { color: '#00A88F' } : { color: 'black' }),
-            ...scale(2 / 5),
-            boxShadow: 'none',
-            fontFamily: 'Montserrat, sans-serif',
-            fontWeight: 700,
-          }}
-        >
-          {props.children}
-        </Link>)
+    <Link
+      to={props.to}
+      style={{
+        ...(active ? { color: '#00A88F' } : { color: 'black' }),
+        ...scale(2 / 5),
+        boxShadow: 'none',
+        fontFamily: 'Montserrat, sans-serif',
+        fontWeight: 700,
       }}
-    </Location>
+    >
+      {props.children}
+    </Link>
   )
 }
 
