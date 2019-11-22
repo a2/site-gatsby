@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import { Location } from '@reach/router';
 
 import { Panda } from '../../components'
 import { rhythm, scale } from '../../utils/typography'
@@ -20,22 +21,26 @@ const NavLink = props => {
     active = props.from === '/'
   } else {
     active = props.from.startsWith(props.to)
-    console.log(props.from, props.to, active)
   }
 
   return (
-    <Link
-      to={props.to}
-      style={{
-        ...(active ? { color: '#00A88F' } : { color: 'black' }),
-        ...scale(2 / 5),
-        boxShadow: 'none',
-        fontFamily: 'Montserrat, sans-serif',
-        fontWeight: 700,
+    <Location>
+      {({ location }) => {
+        console.log(props, location)
+        return (<Link
+          to={props.to}
+          style={{
+            ...(active ? { color: '#00A88F' } : { color: 'black' }),
+            ...scale(2 / 5),
+            boxShadow: 'none',
+            fontFamily: 'Montserrat, sans-serif',
+            fontWeight: 700,
+          }}
+        >
+          {props.children}
+        </Link>)
       }}
-    >
-      {props.children}
-    </Link>
+    </Location>
   )
 }
 
